@@ -22,8 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Variable } from './variable';
-
-export namespace Calder {
-    export class Variable { }
-}
+export * from './variable';
+export * from './function';
+export * from './reference';
+export * from './shader';
