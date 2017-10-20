@@ -8,7 +8,7 @@ import gulp       from "gulp";
 import merge      from "merge2";
 import typescript from "gulp-typescript";
 
-const src = "./src/**/*.ts";
+const src = ["./src/**/*.ts", "./test/**/*.ts"];
 const out = "./build";
 const babelConf = { presets: ["es2015"] };
 
