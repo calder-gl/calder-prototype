@@ -17,8 +17,8 @@ export default class Function implements SyntaxNode {
     }
 
     public source(): string {
-        // TODO: allow more than void
-        return `void ${this.name} {\n` +
+        // TODO: allow more than void()
+        return `void ${this.name}() {\n` +
             this.statements
                 .map(statement => statement.source())
                 .join('\n') +
