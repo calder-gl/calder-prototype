@@ -13,3 +13,10 @@ gulp watch
 # Run the compiled es5 JavaScript code
 npm start
 ```
+
+### Testing
+Note: test files should have the suffix: `.spec.ts`
+```bash
+# Run full test suite
+npm test
+```
