@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "description": "",
+  "name": "calder-gl",
+  "description": "A WebGL library.",
   "private": true,
   "devDependencies": {
     "babel-preset-es2015": "^6.13.2",
