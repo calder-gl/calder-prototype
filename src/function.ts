@@ -11,9 +11,11 @@ export default class Function implements SyntaxNode {
     }
 
     public dependencies(): Set<Variable> {
-        return this.statements.reduce(
-            (union, statement) => new Set([...union, ...statement.dependencies()]),
-            new Set());
+        return this.statements.reduce((union, statement) => (
+                new Set([...union, ...statement.dependencies()])
+            ),
+            new Set()
+        );
     }
 
     public source(): string {
