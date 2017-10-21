@@ -1,4 +1,4 @@
-import { Variable } from './variable';
+import Variable from './variable';
 import SyntaxNode from './syntaxnode';
 
 export default class Reference implements SyntaxNode {

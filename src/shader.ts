@@ -1,4 +1,4 @@
-import { Variable } from './variable';
+import Variable from './variable';
 import Function from './function';
 
 export default class Shader {

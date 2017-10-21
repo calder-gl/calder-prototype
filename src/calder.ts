@@ -26,3 +26,4 @@ export * from './variable';
 export * from './function';
 export * from './reference';
 export * from './shader';
+export * from './qualifier';

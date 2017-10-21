@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as cgl from '../src/calder';
+import * as cgl from './calder';
 
 describe('Shader', () => {
     describe('source', () => {

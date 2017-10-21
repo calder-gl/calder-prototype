@@ -1,14 +1,6 @@
-export enum Qualifier {
-    Attribute = 'attribute',
-    Uniform = 'uniform',
-    Varying = 'varying',
-    Const = 'const',
-    In = 'in',
-    Out = 'out',
-    InOut = 'inout'
-}
+import Qualifier from './qualifier';
 
-export class Variable {
+export default class Variable {
     public readonly name: string;
     public readonly qualifier: Qualifier;
     public readonly kind: string;

@@ -1,5 +1,5 @@
 import SyntaxNode from './syntaxnode';
-import { Variable } from './variable';
+import Variable from './variable';
 import Reference from './reference';
 
 export default class Assignment implements SyntaxNode {
