@@ -3,6 +3,8 @@
 ___
 
 ### Development Setup
+You should have `gulp-cli` installed on your system already: `yarn global add gulp-cli`.
+
 ```bash
 # Install dependencies
 yarn install
