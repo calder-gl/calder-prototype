@@ -1,5 +1,7 @@
 # calder-gl
 :art: Written by &mdash; Paul Bardea, Abhishek Madan, Andrew McBurney, Dave Pagurek Van Mossel
+
+[![CircleCI](https://circleci.com/gh/calder-gl/calder/tree/master.svg?style=svg)](https://circleci.com/gh/calder-gl/calder/tree/master)
 ___
 
 ### Development Setup
