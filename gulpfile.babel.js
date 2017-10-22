@@ -3,12 +3,14 @@
 // calder-gl
 //
 
-import babel      from "gulp-babel";
-import gulp       from "gulp";
-import merge      from "merge2";
+import babel from "gulp-babel";
+import gulp from "gulp";
+import changed from "gulp-changed";
+import merge from "merge2";
 import typescript from "gulp-typescript";
 
-const src = ["./src/**/*.ts", "./test/**/*.ts"];
+const src = ["./src/**/*.ts"];
+const test =  ["./test/**/*.js"]
 const out = "./build";
 const babelConf = { presets: ["es2015"] };
 
@@ -17,21 +19,30 @@ const project = typescript.createProject("tsconfig.json", {
   typescript: require("typescript")
 });
 
-// Gulp task to build .ts to es5 using babel
+// Gulp task to build changed Typescript and tests
 gulp.task("build", function () {
-  var result = gulp.src(src).pipe(typescript(project));
+  const sourceDestination = `${out}/js/src`;
+  const testDestination = `${out}/js/test`;
+
+  const result = gulp.src(src)
+    .pipe(changed(sourceDestination))
+    .pipe(typescript(project));
 
   return merge([
     result.dts.pipe(gulp.dest(`${out}/definitions`)),
     result.js
       .pipe(babel(babelConf))
-      .pipe(gulp.dest(`${out}/js`))
+      .pipe(gulp.dest(sourceDestination)),
+    gulp.src(test)
+      .pipe(changed(testDestination))
+      .pipe(babel(babelConf))
+      .pipe(gulp.dest(testDestination))
   ]);
 });
 
 // Gulp task to watch for changes to .ts files, and build on change
 gulp.task("watch", ["build"], function () {
-  gulp.watch(src, ["build"]);
+  gulp.watch([src, test], ["build"]);
 });
 
 // Set default gulp task as 'build' task

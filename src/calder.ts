@@ -22,8 +22,10 @@
  * THE SOFTWARE.
  */
 
-export * from './variable';
-export * from './function';
-export * from './reference';
-export * from './shader';
-export * from './qualifier';
+export { default as Variable } from './variable';
+export { default as SyntaxNode } from './SyntaxNode';
+export { default as Assignment } from './Assignment';
+export { default as Function } from './function';
+export { default as Reference } from './reference';
+export { default as Shader } from './shader';
+export { default as Qualifier } from './qualifier';

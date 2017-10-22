@@ -12,7 +12,7 @@ export default class Assignment implements SyntaxNode {
     }
 
     public dependencies(): Set<Variable> {
-        return this.rhs.dependencies();
+        return new Set([...this.rhs.dependencies(), ...this.lhs.dependencies()]);
     }
 
     public source(): string {
