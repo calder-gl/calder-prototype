@@ -17,7 +17,7 @@ enum Type {
     Mat3 = 'mat3',
     Mat4 = 'mat4',
     Sampler2D = 'sampler2D',
-    SamplerCube = 'SamplerCube'
+    SamplerCube = 'samplerCube'
 }
 
 export default Type;
