@@ -1,12 +1,14 @@
-import SyntaxNode from './syntaxnode';
+import Expression from './expression';
 import Variable from './variable';
+import Type from './type';
 import Reference from './reference';
 
-export default class Assignment implements SyntaxNode {
+export default class Assignment implements Expression {
     private lhs: Reference;
-    private rhs: SyntaxNode;
+    private rhs: Expression;
 
-    constructor(lhs: Reference, rhs: SyntaxNode) {
+    // TODO: check that lhs and rhs types match
+    constructor(lhs: Reference, rhs: Expression) {
         this.lhs = lhs;
         this.rhs = rhs;
     }
@@ -16,6 +18,10 @@ export default class Assignment implements SyntaxNode {
     }
 
     public source(): string {
-        return `${this.lhs.source()} = ${this.rhs.source()};`;
+        return `${this.lhs.source()} = ${this.rhs.source()}`;
+    }
+
+    public returnType(): Type {
+        return this.lhs.returnType();
     }
 }

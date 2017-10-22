@@ -1,11 +1,12 @@
 import Variable from './variable';
 import SyntaxNode from './syntaxnode';
+import Statement from './statement';
 
 export default class Function implements SyntaxNode {
     public readonly name: string;
-    private statements: SyntaxNode[];
+    private statements: Statement[];
 
-    constructor(name: string, statements: SyntaxNode[] = []) {
+    constructor(name: string, statements: Statement[] = []) {
         this.name = name;
         this.statements = statements;
     }

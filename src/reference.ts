@@ -1,7 +1,8 @@
 import Variable from './variable';
-import SyntaxNode from './syntaxnode';
+import Type from './type';
+import Expression from './expression';
 
-export default class Reference implements SyntaxNode {
+export default class Reference implements Expression {
     private variable: Variable;
 
     constructor(variable: Variable) {
@@ -14,5 +15,9 @@ export default class Reference implements SyntaxNode {
 
     public source(): string {
         return this.variable.name;
+    }
+
+    public returnType(): Type {
+        return this.variable.kind;
     }
 }

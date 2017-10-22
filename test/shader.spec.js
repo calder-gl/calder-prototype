@@ -10,9 +10,11 @@ function basicShader() {
     const vertexPosition = new cgl.Variable(cgl.Qualifier.Attribute, 'vec4', 'vertexPosition');
     const shader = new cgl.Shader(
         new cgl.Function('main', [
-            new cgl.Assignment(
-                new cgl.Reference(glPosition),
-                new cgl.Reference(vertexPosition)
+            new cgl.Statement(
+                new cgl.Assignment(
+                    new cgl.Reference(glPosition),
+                    new cgl.Reference(vertexPosition)
+                )
             )
         ])
     );
