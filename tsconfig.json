@@ -4,7 +4,9 @@
     "module": "es6",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "lib": ["es5", "es6", "dom"]
   },
   "exclude": ["node_modules"]
 }

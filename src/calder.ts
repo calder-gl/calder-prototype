@@ -22,8 +22,13 @@
  * THE SOFTWARE.
  */
 
-import { Variable } from './variable';
-
-export namespace Calder {
-    export class Variable { }
-}
+export { default as Variable } from './variable';
+export { default as SyntaxNode } from './syntaxnode';
+export { default as Expression } from './expression';
+export { default as Statement } from './statement';
+export { default as Assignment } from './assignment';
+export { default as Function } from './function';
+export { default as Reference } from './reference';
+export { default as Shader } from './shader';
+export { default as Qualifier } from './qualifier';
+export { default as Type } from './type';
