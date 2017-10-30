@@ -10,10 +10,14 @@ describe('If', () => {
             const ifStmt = new cgl.If(
                 new cgl.Reference(conditionVariable),
                 new cgl.Block([
-                    new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable1))
+                    new cgl.Statement(
+                        new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable1))
+                    )
                 ]),
                 new cgl.Block([
-                    new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable2))
+                    new cgl.Statement(
+                        new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable2))
+                    )
                 ])
             );
 
@@ -29,7 +33,9 @@ describe('If', () => {
             const ifStmt = new cgl.If(
                 new cgl.Reference(conditionVariable),
                 new cgl.Block([
-                    new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable1))
+                    new cgl.Statement(
+                        new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable1))
+                    )
                 ])
             );
 
