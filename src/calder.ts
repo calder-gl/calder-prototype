@@ -32,3 +32,5 @@ export { default as Reference } from './reference';
 export { default as Shader } from './shader';
 export { default as Qualifier } from './qualifier';
 export { default as Type } from './type';
+export { default as If } from './if'
+export { default as Block } from './block'
