@@ -3,7 +3,7 @@ import Expression from './expression';
 import Statement from './statement';
 import Type from './type';
 
-export default class If implements Expression {
+export default class Block implements Expression {
     private statements: Statement[];
 
     // TODO: add local variables
