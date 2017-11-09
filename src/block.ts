@@ -11,6 +11,10 @@ export default class Block implements Expression {
         this.statements = statements;
     }
 
+    public isEmpty(): boolean {
+        return (this.statements.length == 0);
+    }
+
     public returnType(): Type {
         return Type.Void;
     }

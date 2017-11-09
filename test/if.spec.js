@@ -47,7 +47,7 @@ describe('If', () => {
     });
 
     describe('source', () => {
-        it('has an empty else block if none is provided', () => {
+        it('has no else block if none is provided', () => {
             const a = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'a');
             const b = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'b');
             const ifStmt = new cgl.If(
@@ -59,7 +59,7 @@ describe('If', () => {
                 ])
             );
 
-            expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; } else {}');
+            expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; }');
         });
     })
 });

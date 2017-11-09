@@ -27,9 +27,11 @@ export default class If implements Expression {
     }
 
     public source(): string {
-        return `if (${this.condition.source()})` +
-            this.thenBlock.source() +
-            ' else ' +
-            this.elseBlock.source();
+        let src = `if (${this.condition.source()})` +
+            this.thenBlock.source();
+        if (!this.elseBlock.isEmpty()) {
+            src += `else (${this.elseBlock.source()})`;
+        }
+        return src;
     }
 }
