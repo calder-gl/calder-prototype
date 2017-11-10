@@ -4,8 +4,8 @@ import Block from './block';
 import Type from './type';
 
 export default class While implements Expression {
-    private condition: Expression;
-    private loopBlock: Block;
+    protected condition: Expression;
+    protected loopBlock: Block;
 
     constructor(condition: Expression, loopBlock: Block) {
         this.condition = condition;
