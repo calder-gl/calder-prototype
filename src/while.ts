@@ -2,6 +2,7 @@ import Variable from './variable';
 import Expression from './expression';
 import Block from './block';
 import Type from './type';
+import Set from './util/set';
 
 export default class While implements Expression {
     protected condition: Expression;
@@ -17,10 +18,7 @@ export default class While implements Expression {
     }
 
     public dependencies(): Set<Variable> {
-        return new Set([
-            ...this.condition.dependencies(),
-            ...this.loopBlock.dependencies(),
-        ]);
+        return this.condition.dependencies().union(this.loopBlock.dependencies());
     }
 
     public source(): string {

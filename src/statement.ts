@@ -1,5 +1,6 @@
 import SyntaxNode from './syntaxnode';
 import Variable from './variable';
+import Set from './util/set';
 
 export default class Statement implements SyntaxNode {
     private node: SyntaxNode;

@@ -1,7 +1,8 @@
 import Qualifier from './qualifier';
 import Type from './type';
+import Hashable from './util/hashable';
 
-export default class Variable {
+export default class Variable implements Hashable {
     public readonly name: string;
     public readonly qualifier: Qualifier;
     public readonly kind: Type;
@@ -15,5 +16,9 @@ export default class Variable {
 
     public declaration(): string {
         return `${this.qualifier} ${this.kind} ${this.name};`;
+    }
+
+    public hashCode(): string {
+        return this.declaration();
     }
 }

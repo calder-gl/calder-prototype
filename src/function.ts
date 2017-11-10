@@ -1,6 +1,7 @@
 import Variable from './variable';
 import SyntaxNode from './syntaxnode';
 import Statement from './statement';
+import Set from './util/set';
 
 export default class Function implements SyntaxNode {
     public readonly name: string;
@@ -13,9 +14,9 @@ export default class Function implements SyntaxNode {
 
     public dependencies(): Set<Variable> {
         return this.statements.reduce((union, statement) => (
-                new Set([...union, ...statement.dependencies()])
+                union.addAll(statement.dependencies())
             ),
-            new Set()
+            new Set<Variable>()
         );
     }
 
