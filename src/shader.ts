@@ -20,18 +20,18 @@ export default class Shader {
             .join('\n');
     }
 
-    public inputs(): Type[] {
+    public inputs(): { kind: Type, name: string }[] {
         return [...this.main.dependencies()]
             .filter(dependency => dependency.qualifier == Qualifier.In
                 || dependency.qualifier == Qualifier.InOut
                 || dependency.qualifier == Qualifier.Attribute)
-            .map(dependency => dependency.kind);
+            .map(dependency => ({ kind: dependency.kind, name: dependency.name }));
     }
 
-    public outputs(): Type[] {
+    public outputs(): { kind: Type, name: string }[] {
         return [...this.main.dependencies()]
             .filter(dependency => dependency.qualifier == Qualifier.Out
                 || dependency.qualifier == Qualifier.InOut)
-            .map(dependency => dependency.kind);
+            .map(dependency => ({ kind: dependency.kind, name: dependency.name }));
     }
 }
