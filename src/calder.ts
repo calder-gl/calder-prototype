@@ -34,3 +34,4 @@ export { default as Qualifier } from './qualifier';
 export { default as Type } from './type';
 export { default as If } from './if'
 export { default as Block } from './block'
+export { default as While } from './while'

@@ -9,7 +9,8 @@ export default class While implements Expression {
 
     constructor(condition: Expression, loopBlock: Block) {
         this.condition = condition;
-        this.loopBlock = thenBlock;
+        this.loopBlock = loopBlock;
+    }
 
     public returnType(): Type {
         return Type.Void;

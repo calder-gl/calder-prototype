@@ -23,10 +23,10 @@ describe('While', () => {
     });
 
     describe('source', () => {
-        it('has an empty else block if none is provided', () => {
+        it('is well formed', () => {
             const a = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'a');
             const b = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'b');
-            const ifStmt = new cgl.If(
+            const whileStmt = new cgl.While(
                 new cgl.Reference(a),
                 new cgl.Block([
                     new cgl.Statement(
@@ -35,7 +35,7 @@ describe('While', () => {
                 ])
             );
 
-            expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; } else {}');
+            expect(whileStmt.source()).to.equalIgnoreSpaces('while (a) { a=b; }');
         });
     })
 });
