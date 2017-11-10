@@ -36,3 +36,5 @@ export { default as If } from './if'
 export { default as Block } from './block'
 export { default as While } from './while'
 export { default as DoWhile } from './dowhile'
+export { default as ShaderPipelineBuilder } from './shaderpipelinebuilder';
+export { default as ShaderPipeline } from './shaderpipeline';
