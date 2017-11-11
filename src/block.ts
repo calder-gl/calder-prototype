@@ -1,4 +1,4 @@
-import Expression from './expression';
+import Expression from './expressions/expression';
 import InterfaceVariable from './interface';
 import Set from './util/set';
 import Statement from './statement';
@@ -22,8 +22,8 @@ export default class Block implements Expression {
 
     public dependencies(): Set<InterfaceVariable> {
         return this.statements.reduce((union, statement) => (
-                union.addAll(statement.dependencies())
-            ),
+            union.addAll(statement.dependencies())
+        ),
             new Set<InterfaceVariable>()
         );
     }
