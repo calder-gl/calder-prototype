@@ -1,5 +1,5 @@
 import Expression from './expression';
-import Interface from './interface';
+import InterfaceVariable from './interface';
 import Reference from './reference';
 import Set from './util/set';
 import Type from './type';
@@ -14,7 +14,7 @@ export default class Assignment implements Expression {
         this.rhs = rhs;
     }
 
-    public dependencies(): Set<Interface> {
+    public dependencies(): Set<InterfaceVariable> {
         return this.rhs.dependencies().union(this.lhs.dependencies());
     }
 

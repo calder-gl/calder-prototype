@@ -4,13 +4,13 @@ import * as cgl from '../src/calder';
 describe('While', () => {
     describe('dependencies', () => {
         it('includes both the then and else blocks', () => {
-            const conditionInterface = new cgl.Interface(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'condition'));
-            const someInterface1 = new cgl.Interface(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'someInterface1'));
+            const conditionInterfaceVariable = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'condition'));
+            const someInterfaceVariable1 = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'someInterfaceVariable1'));
             const whileStmt = new cgl.While(
-                new cgl.Reference(conditionInterface),
+                new cgl.Reference(conditionInterfaceVariable),
                 new cgl.Block([
                     new cgl.Statement(
-                        new cgl.Assignment(new cgl.Reference(conditionInterface), new cgl.Reference(someInterface1))
+                        new cgl.Assignment(new cgl.Reference(conditionInterfaceVariable), new cgl.Reference(someInterfaceVariable1))
                     )
                 ])
             );
@@ -18,14 +18,14 @@ describe('While', () => {
             const dependencyNames = [...whileStmt.dependencies()]
                 .map(dependency => dependency.name)
                 .sort();
-            expect(dependencyNames).to.eql(['condition', 'someInterface1']);
+            expect(dependencyNames).to.eql(['condition', 'someInterfaceVariable1']);
         });
     });
 
     describe('source', () => {
         it('is well formed', () => {
-            const a = new cgl.Interface(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
-            const b = new cgl.Interface(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
+            const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
+            const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
             const whileStmt = new cgl.While(
                 new cgl.Reference(a),
                 new cgl.Block([

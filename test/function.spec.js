@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import * as cgl from '../src/calder';
 
 function basicMain() {
-    const glPosition = new cgl.Interface(cgl.Qualifier.Out, new cgl.Variable(cgl.Type.Vec4, 'gl_Position'));
-    const vertexPosition = new cgl.Interface(cgl.Qualifier.Attribute, new cgl.Variable(cgl.Type.Vec4, 'vertexPosition'));
+    const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(cgl.Type.Vec4, 'gl_Position'));
+    const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.Variable(cgl.Type.Vec4, 'vertexPosition'));
     const main = new cgl.Function('main', [
         new cgl.Assignment(
             new cgl.Reference(glPosition),

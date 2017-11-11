@@ -1,16 +1,16 @@
 import Expression from './expression';
-import Interface from './interface';
+import InterfaceVariable from './interface';
 import Set from './util/set';
 import Type from './type';
 
 export default class Reference implements Expression {
-    private variable: Interface;
+    private variable: InterfaceVariable;
 
-    constructor(variable: Interface) {
+    constructor(variable: InterfaceVariable) {
         this.variable = variable;
     }
 
-    public dependencies(): Set<Interface> {
+    public dependencies(): Set<InterfaceVariable> {
         return new Set([this.variable]);
     }
 

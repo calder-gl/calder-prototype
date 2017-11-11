@@ -1,4 +1,4 @@
-import Interface from './interface';
+import InterfaceVariable from './interface';
 import Qualifier from './qualifier';
 import Set from './util/set';
 import SyntaxNode from './syntaxnode';
@@ -7,7 +7,7 @@ import Variable from './variable';
 /**
  * struct type-name {
  *   members
- * } struct-name;
+ * };
  */
 export default class Struct implements SyntaxNode {
     public readonly name: string;
@@ -20,8 +20,8 @@ export default class Struct implements SyntaxNode {
         this.members = members;
     }
 
-    public dependencies(): Set<Interface> {
-        return new Set<Interface>();
+    public dependencies(): Set<InterfaceVariable> {
+        return new Set<InterfaceVariable>();
     }
 
     public source(): string {

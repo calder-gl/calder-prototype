@@ -3,7 +3,7 @@ import Qualifier from './qualifier';
 import Type from './type';
 import Variable from './variable';
 
-export default class Interface implements Hashable {
+export default class InterfaceVariable implements Hashable {
     public readonly name: string;
     public readonly qualifier: Qualifier;
     public readonly kind: Type;

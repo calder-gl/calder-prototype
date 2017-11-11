@@ -6,10 +6,10 @@ describe('Assignment', () => {
         it('references both the left and right hand sides', () => {
             const assignment = new cgl.Assignment(
                 new cgl.Reference(
-                    new cgl.Interface(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'lhs'))
+                    new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'lhs'))
                 ),
                 new cgl.Reference(
-                    new cgl.Interface(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'rhs'))
+                    new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'rhs'))
                 )
             );
 

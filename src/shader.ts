@@ -1,5 +1,5 @@
 import Function from './function';
-import Interface from './interface';
+import InterfaceVariable from './interface';
 import Qualifier from './qualifier';
 import Type from './type';
 
