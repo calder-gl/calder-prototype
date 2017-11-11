@@ -1,15 +1,17 @@
 import Expression from './expression';
-import InterfaceVariable from './interface';
-import Reference from './reference';
-import Set from './util/set';
-import Type from './type';
+import InterfaceVariable from '../interface';
+import Reference from '../reference';
+import Set from '../util/set';
+import Type from '../type';
 
 export default class Assignment implements Expression {
     private lhs: Reference;
     private rhs: Expression;
 
-    // TODO: check that lhs and rhs types match
     constructor(lhs: Reference, rhs: Expression) {
+        if (lhs.returnType() != rhs.returnType())
+            throw new TypeError("Left-hand side and right-hand side do not match types.");
+
         this.lhs = lhs;
         this.rhs = rhs;
     }

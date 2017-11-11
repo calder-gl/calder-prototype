@@ -24,9 +24,11 @@
 
 export { default as Variable } from './variable';
 export { default as SyntaxNode } from './syntaxnode';
-export { default as Expression } from './expression';
+export { default as Expression } from './expressions/expression';
+export { default as AndExpression } from './expressions/boolean/and_expression';
+export { default as OrExpression } from './expressions/boolean/or_expression';
 export { default as Statement } from './statement';
-export { default as Assignment } from './assignment';
+export { default as Assignment } from './expressions/assignment';
 export { default as Function } from './function';
 export { default as Reference } from './reference';
 export { default as Shader } from './shader';

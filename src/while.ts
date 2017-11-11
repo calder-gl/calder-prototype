@@ -1,5 +1,5 @@
 import Block from './block';
-import Expression from './expression';
+import Expression from './expressions/expression';
 import InterfaceVariable from './interface';
 import Set from './util/set';
 import Type from './type';
