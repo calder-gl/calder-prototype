@@ -37,5 +37,5 @@ describe('While', () => {
 
             expect(whileStmt.source()).to.equalIgnoreSpaces('while (a) { a=b; }');
         });
-    })
+    });
 });

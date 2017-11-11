@@ -4,8 +4,8 @@ import * as cgl from '../src/calder';
 describe('ShaderPipelineBuilder', () => {
     describe('checkInputsAndOutputs', () => {
         it('has all fragment shader outputs in vertex shader inputs', () => {
-            const ptColour = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Vec4, 'colour');            
-            const glPosition = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Vec4, 'gl_Position');            
+            const ptColour = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Vec4, 'colour');
+            const glPosition = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Vec4, 'gl_Position');
             const vertexPosition = new cgl.Variable(cgl.Qualifier.Attribute, cgl.Type.Vec4, 'vertexPosition');
             const colour = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'colour');
             const outColour = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Vec4, 'outColour');
@@ -44,7 +44,7 @@ describe('ShaderPipelineBuilder', () => {
         });
 
         it('has some fragment shader outputs not in vertex shader inputs', () => {
-            const glPosition = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Vec4, 'gl_Position');            
+            const glPosition = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Vec4, 'gl_Position');
             const vertexPosition = new cgl.Variable(cgl.Qualifier.Attribute, cgl.Type.Vec4, 'vertexPosition');
             const depth = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Float, 'depth');
             const outDepth = new cgl.Variable(cgl.Qualifier.Out, cgl.Type.Float, 'outDepth');

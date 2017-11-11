@@ -1,3 +1,4 @@
+import SyntaxNode from './syntaxnode';
 import Variable from './variable';
 
 /**
@@ -13,7 +14,7 @@ export default class Struct implements SyntaxNode {
     constructor(name: string, members: Variable[], isArray: boolean = false) {
         this.name = name;
         this.members = members;
-        this.isArray = false;
+        this.isArray = isArray;
     }
 
     public dependencies(): Set<Variable> {
@@ -21,14 +22,14 @@ export default class Struct implements SyntaxNode {
     }
 
     public source(): string {
-        return `struct ${this.name}` +
+        return `struct ${this.name} {` +
             this.members
                 .map(member => member.declaration())
                 .join('\n') +
-            `${this.name + this.arraySuffix()}};`;
+            `} ${this.name + this.arraySuffix()};`;
     }
 
-    private arraySuffix(): void {
-        (this.isArray) ? '[]' : '';
+    private arraySuffix(): string {
+        return this.isArray ? '[]' : '';
     }
 }
