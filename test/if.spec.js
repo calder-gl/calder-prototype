@@ -78,76 +78,95 @@ describe('If', () => {
             expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; }');
         });
 
-        describe('operators', () => {
+        describe('boolean expressions', () => {
             it('and', () => {
                 const ifStmt = new cgl.If(
                     new cgl.AndExpression(new cgl.Reference(a), new cgl.Reference(b)),
-                    new cgl.Block([
-                        new cgl.Statement(
-                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
-                        )
-                    ]),
+                    new cgl.Block([]),
                     new cgl.Block()
                 );
 
-                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a && b)) { a=b; }');
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a && b)) {}');
             });
 
             it('or', () => {
                 const ifStmt = new cgl.If(
                     new cgl.OrExpression(new cgl.Reference(a), new cgl.Reference(b)),
-                    new cgl.Block([
-                        new cgl.Statement(
-                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
-                        )
-                    ]),
+                    new cgl.Block([]),
                     new cgl.Block()
                 );
 
-                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a || b)) { a=b; }');
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a || b)) {}');
             });
 
             it('equal', () => {
                 const ifStmt = new cgl.If(
                     new cgl.EqualExpression(new cgl.Reference(a), new cgl.Reference(b)),
-                    new cgl.Block([
-                        new cgl.Statement(
-                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
-                        )
-                    ]),
+                    new cgl.Block([]),
                     new cgl.Block()
                 );
 
-                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a == b)) { a=b; }');
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a == b)) {}');
             });
 
-
-            it('not equal', () => {
+            it('xor', () => {
                 const ifStmt = new cgl.If(
-                    new cgl.NotEqualExpression(new cgl.Reference(a), new cgl.Reference(b)),
-                    new cgl.Block([
-                        new cgl.Statement(
-                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
-                        )
-                    ]),
+                    new cgl.XorExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([]),
                     new cgl.Block()
                 );
 
-                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a != b)) { a=b; }');
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a ^^ b)) {}');
+            });
+
+            it('less than', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.LessThanExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a < b)) {}');
+            });
+
+            it('less than equal', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.LessThanEqualExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a <= b)) {}');
+            });
+
+            it('greater than', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.GreaterThanExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a > b)) {}');
+            });
+
+            it('greater than equal', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.GreaterThanEqualExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a >= b)) {}');
             });
 
             it('nested', () => {
                 const ifStmt = new cgl.If(
                     new cgl.AndExpression(new cgl.Reference(a), new cgl.OrExpression(new cgl.Reference(b), new cgl.Reference(c))),
-                    new cgl.Block([
-                        new cgl.Statement(
-                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
-                        )
-                    ]),
+                    new cgl.Block([]),
                     new cgl.Block()
                 );
 
-                expect(ifStmt.source()).to.equalIgnoreSpaces('if ( ( a && (b || c) ) ) { a=b; }');
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ( ( a && (b || c) ) ) {}');
             });
         });
     });
