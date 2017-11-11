@@ -13,7 +13,7 @@ describe('Struct', () => {
                 `const struct structName {
                     bool a;
                     bool b;
-                } structName;`
+                };`
             );
         });
     });

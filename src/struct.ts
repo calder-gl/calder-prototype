@@ -29,6 +29,6 @@ export default class Struct implements SyntaxNode {
             this.members
                 .map(member => member.declaration())
                 .join('\n') +
-            `} ${this.name};`;
+            '};';
     }
 }
