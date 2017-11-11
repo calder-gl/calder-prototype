@@ -7,10 +7,10 @@ describe('Struct', () => {
         const b = new cgl.Variable(cgl.Type.Bool, 'b');
 
         it('is well formed', () => {
-            const structure = new cgl.Struct('structName', [a, b]);
+            const structure = new cgl.Struct(cgl.Qualifier.Const, 'structName', [a, b]);
 
             expect(structure.source()).to.equalIgnoreSpaces(
-                `struct structName {
+                `const struct structName {
                     bool a;
                     bool b;
                 } structName;`
