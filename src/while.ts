@@ -1,8 +1,8 @@
-import Variable from './variable';
-import Expression from './expression';
 import Block from './block';
-import Type from './type';
+import Expression from './expression';
+import Interface from './interface';
 import Set from './util/set';
+import Type from './type';
 
 export default class While implements Expression {
     protected condition: Expression;
@@ -17,7 +17,7 @@ export default class While implements Expression {
         return Type.Void;
     }
 
-    public dependencies(): Set<Variable> {
+    public dependencies(): Set<Interface> {
         return this.condition.dependencies().union(this.loopBlock.dependencies());
     }
 

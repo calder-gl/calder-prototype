@@ -1,24 +1,24 @@
+import Interface from './interface';
+import Set from './util/set';
 import SyntaxNode from './syntaxnode';
 import Variable from './variable';
 
 /**
  * struct type-name {
  *   members
- * } struct-name[]; // Optionally an array
+ * } struct-name;
  */
 export default class Struct implements SyntaxNode {
     public readonly name: string;
     private members: Variable[];
-    private isArray: boolean;
 
-    constructor(name: string, members: Variable[], isArray: boolean = false) {
+    constructor(name: string, members: Variable[]) {
         this.name = name;
         this.members = members;
-        this.isArray = isArray;
     }
 
-    public dependencies(): Set<Variable> {
-        return new Set(this.members);
+    public dependencies(): Set<Interface> {
+        return new Set();
     }
 
     public source(): string {
@@ -26,10 +26,6 @@ export default class Struct implements SyntaxNode {
             this.members
                 .map(member => member.declaration())
                 .join('\n') +
-            `} ${this.name + this.arraySuffix()};`;
-    }
-
-    private arraySuffix(): string {
-        return this.isArray ? '[]' : '';
+            `} ${this.name};`;
     }
 }

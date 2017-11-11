@@ -1,5 +1,5 @@
-import Variable from './variable';
 import Function from './function';
+import Interface from './interface';
 import Qualifier from './qualifier';
 import Type from './type';
 
@@ -8,7 +8,7 @@ export default class Shader {
 
     constructor(main: Function = new Function('main')) {
         this.main = main;
-    } 
+    }
 
     public source(): string {
         return `${this.header()}\n${this.main.source()}`;

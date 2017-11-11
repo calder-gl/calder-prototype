@@ -5,7 +5,7 @@ describe('Reference', () => {
     describe('dependencies', () => {
         it('references the contained variable', () => {
             const ref = new cgl.Reference(
-                new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'test')
+                new cgl.Interface(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'test'))
             );
 
             expect(

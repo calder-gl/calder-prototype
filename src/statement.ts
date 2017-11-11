@@ -1,6 +1,6 @@
-import SyntaxNode from './syntaxnode';
-import Variable from './variable';
+import Interface from './interface';
 import Set from './util/set';
+import SyntaxNode from './syntaxnode';
 
 export default class Statement implements SyntaxNode {
     private node: SyntaxNode;
@@ -9,7 +9,7 @@ export default class Statement implements SyntaxNode {
         this.node = node;
     }
 
-    public dependencies(): Set<Variable> {
+    public dependencies(): Set<Interface> {
         return this.node.dependencies();
     }
 
