@@ -1,7 +1,7 @@
 enum MetaKind {
     Basic,
     Struct,
-    Array,
+    Array
 }
 
 export default MetaKind;
