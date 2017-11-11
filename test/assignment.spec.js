@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import * as cgl from '../src/calder';
 
 describe('Assignment', () => {
-    const lhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'lhs')));
-    const rhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'rhs')));
+    const lhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'lhs')));
+    const rhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'rhs')));
 
     describe('dependencies', () => {
         it('references both the left and right hand sides', () => {

@@ -3,19 +3,19 @@ import Qualifier from './qualifier';
 import Set from './util/set';
 import SyntaxNode from './syntaxnode';
 import Variable from './variable';
+import Type from './type';
+import MetaKind from './metakind';
 
 /**
  * struct type-name {
  *   members
  * };
  */
-export default class Struct implements SyntaxNode {
+export default class DeclareStruct implements SyntaxNode {
     public readonly name: string;
-    public readonly qualifier: Qualifier;
     private members: Variable[];
 
-    constructor(qualifier: Qualifier, name: string, members: Variable[]) {
-        this.qualifier = qualifier
+    constructor(name: string, members: Variable[]) {
         this.name = name;
         this.members = members;
     }
@@ -24,8 +24,12 @@ export default class Struct implements SyntaxNode {
         return new Set<InterfaceVariable>();
     }
 
+    public type(): Type {
+        return new Type(this.name, MetaKind.Struct, this.members.map(member => member.type));
+    }
+
     public source(): string {
-        return `${this.qualifier} struct ${this.name} {` +
+        return `struct ${this.name} {` +
             this.members
                 .map(member => member.declaration())
                 .join('\n') +

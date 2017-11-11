@@ -19,6 +19,6 @@ export default class Reference implements Expression {
     }
 
     public returnType(): Type {
-        return this.variable.kind;
+        return this.variable.type;
     }
 }

@@ -2,6 +2,8 @@ import Function from './function';
 import InterfaceVariable from './interface';
 import Qualifier from './qualifier';
 import Type from './type';
+import Variable from './variable';
+import Set from './util/set';
 
 export default class Shader {
     public main: Function;
@@ -20,18 +22,18 @@ export default class Shader {
             .join('\n');
     }
 
-    public inputs(): { kind: Type, name: string }[] {
-        return [...this.main.dependencies()]
+    public inputs(): Set<Variable> {
+        return new Set([...this.main.dependencies()]
             .filter(dependency => dependency.qualifier == Qualifier.In
                 || dependency.qualifier == Qualifier.InOut
                 || dependency.qualifier == Qualifier.Attribute)
-            .map(dependency => ({ kind: dependency.kind, name: dependency.name }));
+            .map(dependency => dependency.variable));
     }
 
-    public outputs(): { kind: Type, name: string }[] {
-        return [...this.main.dependencies()]
+    public outputs(): Set<Variable> {
+        return new Set([...this.main.dependencies()]
             .filter(dependency => dependency.qualifier == Qualifier.Out
                 || dependency.qualifier == Qualifier.InOut)
-            .map(dependency => ({ kind: dependency.kind, name: dependency.name }));
+            .map(dependency => dependency.variable));
     }
 }

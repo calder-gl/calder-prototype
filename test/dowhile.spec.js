@@ -4,8 +4,8 @@ import * as cgl from '../src/calder';
 describe('DoWhile', () => {
     describe('dependencies', () => {
         it('includes both the then and else blocks', () => {
-            const conditionInterfaceVariable = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'condition'));
-            const someInterfaceVariable1 = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'someInterfaceVariable1'));
+            const conditionInterfaceVariable = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Bool), 'condition'));
+            const someInterfaceVariable1 = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Bool), 'someInterfaceVariable1'));
             const doWhileStmt = new cgl.DoWhile(
                 new cgl.Reference(conditionInterfaceVariable),
                 new cgl.Block([
@@ -24,8 +24,8 @@ describe('DoWhile', () => {
 
     describe('source', () => {
         it('is well formed', () => {
-            const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
-            const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
+            const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Bool), 'a'));
+            const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Bool), 'b'));
             const doWhileStmt = new cgl.DoWhile(
                 new cgl.Reference(a),
                 new cgl.Block([

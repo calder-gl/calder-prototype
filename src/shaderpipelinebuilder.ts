@@ -15,37 +15,10 @@ export default class ShaderPipelineBuilder {
 
         // Vertex shader outputs must be a superset of fragment shader inputs.
         // Might want to enforce equality (need to check the standard), but for now, this should be sufficient.
-        this.isWellFormed = true;
-        if (this.vertexShader.outputs().length < this.fragmentShader.inputs().length) {
-            this.isWellFormed = false;
-        }
+        const inVars = this.fragmentShader.inputs();
+        const outVars = this.vertexShader.outputs();
 
-        // Sort the inputs and outputs to ensure we can efficiently do a subset comparison. Equality doesn't
-        // work because we want to compare fields, so Set.has() doesn't work.
-        const compareVars = (a: { kind: Type, name: string }, b: { kind: Type, name: string }) => {
-            if (a.kind < b.kind) {
-                return -1;
-            } else if (b.kind < b.kind) {
-                return 1;
-            } else {
-                if (a.kind < b.kind) return -1;
-                else if (b.kind < a.kind) return 1;
-                else return 0;
-            }
-        };
-        const inVars = this.fragmentShader.inputs().sort(compareVars);
-        const outVars = this.vertexShader.outputs().sort(compareVars);
-
-        let inIdx = 0;
-        for (let outIdx = 0; outIdx < outVars.length && inIdx < inVars.length; outIdx++) {
-            if (inVars[inIdx].kind == outVars[outIdx].kind && inVars[inIdx].name == outVars[outIdx].name) {
-                inIdx++;
-            }
-        }
-
-        if (inIdx < inVars.length) {
-            this.isWellFormed = false;
-        }
+        this.isWellFormed = outVars.isSuperset(inVars);
     }
 
     public build(): ShaderPipeline {
