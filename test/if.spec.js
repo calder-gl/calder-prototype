@@ -107,6 +107,35 @@ describe('If', () => {
                 expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a || b)) { a=b; }');
             });
 
+            it('equal', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.EqualExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([
+                        new cgl.Statement(
+                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
+                        )
+                    ]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a == b)) { a=b; }');
+            });
+
+
+            it('not equal', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.NotEqualExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([
+                        new cgl.Statement(
+                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
+                        )
+                    ]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a != b)) { a=b; }');
+            });
+
             it('nested', () => {
                 const ifStmt = new cgl.If(
                     new cgl.AndExpression(new cgl.Reference(a), new cgl.OrExpression(new cgl.Reference(b), new cgl.Reference(c))),
