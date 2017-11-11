@@ -1,7 +1,7 @@
-import Variable from './variable';
-import SyntaxNode from './syntaxnode';
-import Statement from './statement';
+import InterfaceVariable from './interface';
 import Set from './util/set';
+import Statement from './statement';
+import SyntaxNode from './syntaxnode';
 
 export default class Function implements SyntaxNode {
     public readonly name: string;
@@ -12,11 +12,11 @@ export default class Function implements SyntaxNode {
         this.statements = statements;
     }
 
-    public dependencies(): Set<Variable> {
+    public dependencies(): Set<InterfaceVariable> {
         return this.statements.reduce((union, statement) => (
                 union.addAll(statement.dependencies())
             ),
-            new Set<Variable>()
+            new Set<InterfaceVariable>()
         );
     }
 

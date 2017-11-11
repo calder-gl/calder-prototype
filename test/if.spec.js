@@ -4,19 +4,19 @@ import * as cgl from '../src/calder';
 describe('If', () => {
     describe('dependencies', () => {
         it('includes both the then and else blocks', () => {
-            const conditionVariable = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'condition');
-            const someVariable1 = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'someVariable1');
-            const someVariable2 = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'someVariable2');
+            const conditionInterfaceVariable = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'condition'));
+            const someInterfaceVariable1 = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'someInterfaceVariable1'));
+            const someInterfaceVariable2 = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'someInterfaceVariable2'));
             const ifStmt = new cgl.If(
-                new cgl.Reference(conditionVariable),
+                new cgl.Reference(conditionInterfaceVariable),
                 new cgl.Block([
                     new cgl.Statement(
-                        new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable1))
+                        new cgl.Assignment(new cgl.Reference(conditionInterfaceVariable), new cgl.Reference(someInterfaceVariable1))
                     )
                 ]),
                 new cgl.Block([
                     new cgl.Statement(
-                        new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable2))
+                        new cgl.Assignment(new cgl.Reference(conditionInterfaceVariable), new cgl.Reference(someInterfaceVariable2))
                     )
                 ])
             );
@@ -24,17 +24,17 @@ describe('If', () => {
             const dependencyNames = [...ifStmt.dependencies()]
                 .map(dependency => dependency.name)
                 .sort();
-            expect(dependencyNames).to.eql(['condition', 'someVariable1', 'someVariable2']);
+            expect(dependencyNames).to.eql(['condition', 'someInterfaceVariable1', 'someInterfaceVariable2']);
         });
 
         it('excludes the else block if none is present', () => {
-            const conditionVariable = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'condition');
-            const someVariable1 = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'someVariable1');
+            const conditionInterfaceVariable = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'condition'));
+            const someInterfaceVariable1 = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'someInterfaceVariable1'));
             const ifStmt = new cgl.If(
-                new cgl.Reference(conditionVariable),
+                new cgl.Reference(conditionInterfaceVariable),
                 new cgl.Block([
                     new cgl.Statement(
-                        new cgl.Assignment(new cgl.Reference(conditionVariable), new cgl.Reference(someVariable1))
+                        new cgl.Assignment(new cgl.Reference(conditionInterfaceVariable), new cgl.Reference(someInterfaceVariable1))
                     )
                 ])
             );
@@ -42,14 +42,14 @@ describe('If', () => {
             const dependencyNames = [...ifStmt.dependencies()]
                 .map(dependency => dependency.name)
                 .sort();
-            expect(dependencyNames).to.eql(['condition', 'someVariable1']);
+            expect(dependencyNames).to.eql(['condition', 'someInterfaceVariable1']);
         });
     });
 
     describe('source', () => {
         it('has no else block if none is provided', () => {
-            const a = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'a');
-            const b = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'b');
+            const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
+            const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
             const ifStmt = new cgl.If(
                 new cgl.Reference(a),
                 new cgl.Block([
@@ -61,12 +61,12 @@ describe('If', () => {
 
             expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; }');
         });
-    })
+    });
 
     describe('source', () => {
         it('has no else block if an empty block is provided', () => {
-            const a = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'a');
-            const b = new cgl.Variable(cgl.Qualifier.In, cgl.Type.Bool, 'b');
+            const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
+            const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
             const ifStmt = new cgl.If(
                 new cgl.Reference(a),
                 new cgl.Block([
@@ -79,5 +79,5 @@ describe('If', () => {
 
             expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; }');
         });
-    })
+    });
 });

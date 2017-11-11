@@ -33,8 +33,10 @@ export { default as Shader } from './shader';
 export { default as Qualifier } from './qualifier';
 export { default as Type } from './type';
 export { default as If } from './if'
+export { default as InterfaceVariable } from './interface';
 export { default as Block } from './block'
 export { default as While } from './while'
 export { default as DoWhile } from './dowhile'
+export { default as Struct } from './struct'
 export { default as ShaderPipelineBuilder } from './shaderpipelinebuilder';
 export { default as ShaderPipeline } from './shaderpipeline';

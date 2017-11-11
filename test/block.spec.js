@@ -6,10 +6,10 @@ describe('Block', () => {
         it('references all included statements', () => {
             const block = new cgl.Block([
                 new cgl.Reference(
-                    new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'a')
+                    new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'a'))
                 ),
                 new cgl.Reference(
-                    new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'b')
+                    new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'b'))
                 )
             ]);
 
@@ -32,12 +32,12 @@ describe('Block', () => {
             const block = new cgl.Block([
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'a')
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'a'))
                     )
                 ),
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'b')
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'b'))
                     )
                 )
             ]);
@@ -57,12 +57,12 @@ describe('Block', () => {
             const block = new cgl.Block([
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'a')
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'a'))
                     )
                 ),
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.Variable(cgl.Qualifier.In, cgl.Type.Vec4, 'b')
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'b'))
                     )
                 )
             ]);

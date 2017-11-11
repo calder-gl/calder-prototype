@@ -6,8 +6,8 @@ chai.use(chaiString);
 const { expect } = chai;
 
 function basicShader() {
-    const glPosition = new cgl.Variable(cgl.Qualifier.Out, 'vec4', 'gl_Position');
-    const vertexPosition = new cgl.Variable(cgl.Qualifier.Attribute, 'vec4', 'vertexPosition');
+    const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable('vec4', 'gl_Position'));
+    const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.Variable('vec4', 'vertexPosition'));
     const shader = new cgl.Shader(
         new cgl.Function('main', [
             new cgl.Statement(

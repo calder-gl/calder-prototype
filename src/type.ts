@@ -1,4 +1,4 @@
-// TODO: Deal with structs and arrays
+// TODO: Deal with arrays
 enum Type {
     Void = 'void',
     Bool = 'bool',
@@ -17,7 +17,8 @@ enum Type {
     Mat3 = 'mat3',
     Mat4 = 'mat4',
     Sampler2D = 'sampler2D',
-    SamplerCube = 'samplerCube'
+    SamplerCube = 'samplerCube',
+    Struct = 'struct'
 }
 
 export default Type;
