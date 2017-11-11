@@ -2,6 +2,7 @@ import Expression from './expression';
 import Variable from './variable';
 import Type from './type';
 import Reference from './reference';
+import Set from './util/set';
 
 export default class Assignment implements Expression {
     private lhs: Reference;
@@ -14,7 +15,7 @@ export default class Assignment implements Expression {
     }
 
     public dependencies(): Set<Variable> {
-        return new Set([...this.rhs.dependencies(), ...this.lhs.dependencies()]);
+        return this.rhs.dependencies().union(this.lhs.dependencies());
     }
 
     public source(): string {

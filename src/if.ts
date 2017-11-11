@@ -2,6 +2,7 @@ import Variable from './variable';
 import Expression from './expression';
 import Block from './block';
 import Type from './type';
+import Set from './util/set';
 
 export default class If implements Expression {
     private condition: Expression;
@@ -19,11 +20,9 @@ export default class If implements Expression {
     }
 
     public dependencies(): Set<Variable> {
-        return new Set([
-            ...this.condition.dependencies(),
-            ...this.thenBlock.dependencies(),
-            ...this.elseBlock.dependencies()
-        ]);
+        return this.condition.dependencies()
+            .union(this.thenBlock.dependencies())
+            .union(this.elseBlock.dependencies());
     }
 
     public source(): string {

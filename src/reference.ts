@@ -1,6 +1,7 @@
 import Variable from './variable';
 import Type from './type';
 import Expression from './expression';
+import Set from './util/set';
 
 export default class Reference implements Expression {
     private variable: Variable;

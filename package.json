@@ -21,6 +21,6 @@
     "watch": "gulp watch",
     "build": "gulp",
     "start": "node build/js/index.js",
-    "test": "gulp && ./node_modules/.bin/mocha ./build/js/test/**/*.spec.js"
+    "test": "gulp && ./node_modules/.bin/mocha ./build/js/test/ --recursive"
   }
 }

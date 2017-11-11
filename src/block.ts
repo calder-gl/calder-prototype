@@ -2,6 +2,7 @@ import Variable from './variable';
 import Expression from './expression';
 import Statement from './statement';
 import Type from './type';
+import Set from './util/set';
 
 export default class Block implements Expression {
     private statements: Statement[];
@@ -21,9 +22,9 @@ export default class Block implements Expression {
 
     public dependencies(): Set<Variable> {
         return this.statements.reduce((union, statement) => (
-                new Set([...union, ...statement.dependencies()])
+                union.addAll(statement.dependencies())
             ),
-            new Set()
+            new Set<Variable>()
         );
     }
 
