@@ -47,9 +47,11 @@ describe('If', () => {
     });
 
     describe('source', () => {
+        const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
+        const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
+        const c = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'c'));
+
         it('has no else block if none is provided', () => {
-            const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
-            const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
             const ifStmt = new cgl.If(
                 new cgl.Reference(a),
                 new cgl.Block([
@@ -61,12 +63,8 @@ describe('If', () => {
 
             expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; }');
         });
-    });
 
-    describe('source', () => {
         it('has no else block if an empty block is provided', () => {
-            const a = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'a'));
-            const b = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Bool, 'b'));
             const ifStmt = new cgl.If(
                 new cgl.Reference(a),
                 new cgl.Block([
@@ -78,6 +76,50 @@ describe('If', () => {
             );
 
             expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; }');
+        });
+
+        describe('operators', () => {
+            it('and', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.AndExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([
+                        new cgl.Statement(
+                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
+                        )
+                    ]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a && b)) { a=b; }');
+            });
+
+            it('or', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.OrExpression(new cgl.Reference(a), new cgl.Reference(b)),
+                    new cgl.Block([
+                        new cgl.Statement(
+                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
+                        )
+                    ]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ((a || b)) { a=b; }');
+            });
+
+            it('nested', () => {
+                const ifStmt = new cgl.If(
+                    new cgl.AndExpression(new cgl.Reference(a), new cgl.OrExpression(new cgl.Reference(b), new cgl.Reference(c))),
+                    new cgl.Block([
+                        new cgl.Statement(
+                            new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
+                        )
+                    ]),
+                    new cgl.Block()
+                );
+
+                expect(ifStmt.source()).to.equalIgnoreSpaces('if ( ( a && (b || c) ) ) { a=b; }');
+            });
         });
     });
 });

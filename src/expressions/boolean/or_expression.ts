@@ -5,10 +5,10 @@ import Set from '../../util/set';
 import Type from '../../type';
 
 export default class OrExpression implements Expression {
-    private lhs: Reference;
+    private lhs: Expression;
     private rhs: Expression;
 
-    constructor(lhs: Reference, rhs: Expression) {
+    constructor(lhs: Expression, rhs: Expression) {
         if (lhs.returnType() != Type.Bool || rhs.returnType() != Type.Bool)
             throw new TypeError("Not a boolean expression");
 
@@ -21,7 +21,7 @@ export default class OrExpression implements Expression {
     }
 
     public source(): string {
-        return `${this.lhs.source()} || ${this.rhs.source()}`;
+        return `(${this.lhs.source()} || ${this.rhs.source()})`;
     }
 
     public returnType(): Type {
