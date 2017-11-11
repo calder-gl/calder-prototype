@@ -9,6 +9,7 @@ export default class OrExpression implements Expression {
     private rhs: Expression;
 
     constructor(lhs: Expression, rhs: Expression) {
+        // TODO: add bool casting
         if (lhs.returnType() != Type.Bool || rhs.returnType() != Type.Bool)
             throw new TypeError("Not a boolean expression");
 
