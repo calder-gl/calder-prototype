@@ -1,6 +1,4 @@
-import Hashable from './util/hashable';
 import Qualifier from './qualifier';
-import Type from './type';
 import Variable from './variable';
 import VariableSource from './variablesource';
 
