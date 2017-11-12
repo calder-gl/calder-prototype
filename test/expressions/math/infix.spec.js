@@ -62,7 +62,7 @@ describe('Infix Expressions', () => {
 
         it ('can\'t add string to integer', () => {
             expect(() => new cgl.Addition(lhs, stringVar))
-                .to.throw('LHS and RHS must be of type Int or Float.');
+                .to.throw('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
         });
 
         it('modulo must have both types integers', () => {
