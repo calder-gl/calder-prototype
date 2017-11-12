@@ -1,7 +1,7 @@
-import Shader from './shader';
+import InterfaceVariable from './interfacevariable';
 import Qualifier from './qualifier';
 import Set from './util/set';
-import InterfaceVariable from './interfacevariable';
+import Shader from './shader';
 
 export default class ShaderPipeline {
     private readonly gl: WebGLRenderingContext;
