@@ -61,6 +61,12 @@ export { default as PostfixDecrement } from './expressions/math/unary/postfix_de
 export { default as Comma } from './expressions/other/comma';
 
 /*****************************
+ * Exceptions
+ *****************************/
+
+export { default as TypeException } from './exceptions/typeexception';
+
+/*****************************
  * Other
  *****************************/
 
