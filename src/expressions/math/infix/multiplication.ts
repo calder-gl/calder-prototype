@@ -1,12 +1,13 @@
 import InfixExpression from './infix_expression'
 import Expression from '../../expression';
+import TypeException from '../../../exceptions/typeexception';
 
 export default class Multiplication extends InfixExpression {
     constructor(lhs: Expression, rhs: Expression) {
         super(lhs, rhs);
 
         if (!super.bothSameSizeMatrices() && super.anySideVectorOrMatrix(lhs, rhs)) {
-            throw new TypeError('LHS and RHS must be of type Int, Float, or both sides must be same size matrices.');
+            throw new TypeException('LHS and RHS must be of type Int, Float, or both sides must be same size matrices.');
         }
     }
 

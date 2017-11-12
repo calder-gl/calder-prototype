@@ -3,6 +3,7 @@ import InterfaceVariable from '../../../interfacevariable';
 import Kind from '../../../kind';
 import Set from '../../../util/set';
 import Type from '../../../type';
+import TypeException from '../../../exceptions/typeexception';
 
 export default abstract class InfixExpression implements Expression {
     protected lhs: Expression;
@@ -13,7 +14,7 @@ export default abstract class InfixExpression implements Expression {
         this.rhs = rhs;
 
         if (!this.bothSameSizeVectors() && !this.bothSameSizeMatrices() && !this.bothSidesScalarTypes()) {
-            throw new TypeError('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
+            throw new TypeException('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
         }
     }
 
