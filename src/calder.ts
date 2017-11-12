@@ -57,6 +57,14 @@ export { default as PrefixDecrement } from './expressions/math/unary/prefix_decr
 export { default as PostfixIncrement } from './expressions/math/unary/postfix_increment';
 export { default as PostfixDecrement } from './expressions/math/unary/postfix_decrement';
 
+// Infix Math Expressions
+export { default as InfixExpression } from './expressions/math/infix/infix_expression';
+export { default as Addition } from './expressions/math/infix/addition';
+export { default as Subtraction } from './expressions/math/infix/subtraction';
+export { default as Multiplication } from './expressions/math/infix/multiplication';
+export { default as Division } from './expressions/math/infix/division';
+export { default as Modulo } from './expressions/math/infix/modulo';
+
 // Other Expressions
 export { default as Comma } from './expressions/other/comma';
 
