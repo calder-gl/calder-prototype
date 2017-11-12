@@ -1,8 +1,8 @@
 import Expression from '../../expression';
-import InterfaceVariable from '../../../interface';
+import InterfaceVariable from '../../../interfacevariable';
+import Kind from '../../../kind';
 import Set from '../../../util/set';
 import Type from '../../../type';
-import Kind from '../../../kind';
 
 export default abstract class InfixExpression implements Expression {
     protected lhs: Expression;
