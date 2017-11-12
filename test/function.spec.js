@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import * as cgl from '../src/calder';
 
 function basicMain() {
-    const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'gl_Position'));
-    const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'vertexPosition'));
+    const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'gl_Position'));
+    const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'vertexPosition'));
     const main = new cgl.Function('main', [
         new cgl.Assignment(
             new cgl.Reference(glPosition),
@@ -19,7 +19,7 @@ describe('Function', () => {
         it('knows what variables it depends on', () => {
             const main = basicMain();
             const dependencyNames = [...main.dependencies()]
-              .map(dependency => dependency.name)
+              .map(dependency => dependency.name())
               .sort();
 
             expect(dependencyNames).to.eql(['gl_Position', 'vertexPosition']);

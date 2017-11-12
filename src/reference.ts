@@ -1,6 +1,6 @@
 import Expression from './expressions/expression';
-import InterfaceVariable from './interface';
 import Qualifier from './qualifier';
+import InterfaceVariable from './interfacevariable';
 import Set from './util/set';
 import Type from './type';
 
@@ -18,10 +18,10 @@ export default class Reference implements Expression {
     }
 
     public source(): string {
-        return this.variable.name;
+        return this.variable.name();
     }
 
     public returnType(): Type {
-        return this.variable.type;
+        return this.variable.type();
     }
 }

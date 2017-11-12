@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-export { default as Variable } from './variable';
 export { default as SyntaxNode } from './syntaxnode';
 
 /*****************************
@@ -71,10 +70,13 @@ export { default as Type } from './type';
 export { default as MetaKind } from './metakind';
 export { default as Kind } from './kind';
 export { default as If } from './if'
-export { default as InterfaceVariable } from './interface';
 export { default as Block } from './block'
 export { default as While } from './while'
 export { default as DoWhile } from './dowhile'
 export { default as DeclareStruct } from './declarestruct'
 export { default as ShaderPipelineBuilder } from './shaderpipelinebuilder';
 export { default as ShaderPipeline } from './shaderpipeline';
+
+export { default as VariableSource } from './variablesource';
+export { default as Variable } from './variable';
+export { default as InterfaceVariable } from './interfacevariable';

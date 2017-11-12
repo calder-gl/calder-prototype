@@ -1,9 +1,9 @@
 import Function from './function';
-import InterfaceVariable from './interface';
+import InterfaceVariable from './interfacevariable';
 import Qualifier from './qualifier';
 import Type from './type';
-import Variable from './variable';
 import Set from './util/set';
+import VariableSource from './variablesource';
 
 export default class Shader {
     public main: Function;
@@ -22,18 +22,18 @@ export default class Shader {
             .join('\n');
     }
 
-    public inputs(): Set<Variable> {
+    public inputs(): Set<VariableSource> {
         return new Set([...this.main.dependencies()]
             .filter(dependency => dependency.qualifier == Qualifier.In
                 || dependency.qualifier == Qualifier.InOut
                 || dependency.qualifier == Qualifier.Attribute)
-            .map(dependency => dependency.variable));
+            .map(dependency => dependency.variableSrc));
     }
 
-    public outputs(): Set<Variable> {
+    public outputs(): Set<VariableSource> {
         return new Set([...this.main.dependencies()]
             .filter(dependency => dependency.qualifier == Qualifier.Out
                 || dependency.qualifier == Qualifier.InOut)
-            .map(dependency => dependency.variable));
+            .map(dependency => dependency.variableSrc));
     }
 }

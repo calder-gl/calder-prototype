@@ -1,6 +1,6 @@
 import Block from './block';
 import Expression from './expressions/expression';
-import InterfaceVariable from './interface';
+import InterfaceVariable from './interfacevariable';
 import Set from './util/set';
 import Type from './type';
 import Kind from './kind';

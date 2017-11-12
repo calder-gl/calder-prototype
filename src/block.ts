@@ -1,5 +1,5 @@
 import Expression from './expressions/expression';
-import InterfaceVariable from './interface';
+import InterfaceVariable from './interfacevariable';
 import Set from './util/set';
 import Statement from './statement';
 import Type from './type';
