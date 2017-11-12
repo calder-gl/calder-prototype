@@ -4,11 +4,11 @@ import * as cgl from '../src/calder';
 describe('ShaderPipelineBuilder', () => {
     describe('checkInputsAndOutputs', () => {
         it('has all fragment shader outputs in vertex shader inputs', () => {
-            const ptColour = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(cgl.Type.Vec4, 'colour'));
-            const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(cgl.Type.Vec4, 'gl_Position'));
-            const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.Variable(cgl.Type.Vec4, 'vertexPosition'));
-            const colour = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Vec4, 'colour'));
-            const outColour = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(cgl.Type.Vec4, 'outColour'));
+            const ptColour = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'colour'));
+            const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'gl_Position'));
+            const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'vertexPosition'));
+            const colour = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'colour'));
+            const outColour = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'outColour'));
 
             const vertexShader = new cgl.Shader(
                 new cgl.Function('main', [
@@ -44,10 +44,10 @@ describe('ShaderPipelineBuilder', () => {
         });
 
         it('has some fragment shader outputs not in vertex shader inputs', () => {
-            const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(cgl.Type.Vec4, 'gl_Position'));
-            const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.Variable(cgl.Type.Vec4, 'vertexPosition'));
-            const depth = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(cgl.Type.Float, 'depth'));
-            const outDepth = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(cgl.Type.Float, 'outDepth'));
+            const glPosition = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'gl_Position'));
+            const vertexPosition = new cgl.InterfaceVariable(cgl.Qualifier.Attribute, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'vertexPosition'));
+            const depth = new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Float), 'depth'));
+            const outDepth = new cgl.InterfaceVariable(cgl.Qualifier.Out, new cgl.Variable(new cgl.Type(cgl.Kind.Float), 'outDepth'));
 
             const vertexShader = new cgl.Shader(
                 new cgl.Function('main', [

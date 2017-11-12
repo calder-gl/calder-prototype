@@ -1,13 +1,14 @@
 import BooleanExpression from './boolean_expression';
 import Expression from '../expression';
 import Type from '../../type';
+import Kind from '../../kind';
 
 export default class OrExpression extends BooleanExpression {
     constructor(lhs: Expression, rhs: Expression) {
         super(lhs, rhs);
 
         // TODO: add bool casting
-        if (lhs.returnType() != Type.Bool || rhs.returnType() != Type.Bool)
+        if (!lhs.returnType().checkEquals(new Type(Kind.Bool)) || !rhs.returnType().checkEquals(new Type(Kind.Bool)))
             throw new TypeError("Not a boolean expression");
     }
 

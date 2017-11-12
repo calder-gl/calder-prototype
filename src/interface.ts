@@ -6,14 +6,13 @@ import Variable from './variable';
 export default class InterfaceVariable implements Hashable {
     public readonly name: string;
     public readonly qualifier: Qualifier;
-    public readonly kind: Type;
-    private variable: Variable;
+    public readonly type: Type;
+    public readonly variable: Variable;
 
-    // TODO: typecheck kind
     constructor(qualifier: Qualifier, variable: Variable) {
         this.qualifier = qualifier;
         this.name = variable.name;
-        this.kind = variable.kind;
+        this.type = variable.type;
         this.variable = variable;
     }
 

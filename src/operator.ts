@@ -3,6 +3,7 @@ import InterfaceVariable from './interface';
 import Reference from './reference';
 import Set from './util/set';
 import Type from './type';
+import Kind from './kind';
 
 export default class Operator implements Expression {
     private lhs: Reference;
@@ -23,6 +24,6 @@ export default class Operator implements Expression {
     }
 
     public returnType(): Type {
-        return Type.Bool;
+        return new Type(Kind.Bool);
     }
 }

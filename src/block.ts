@@ -3,6 +3,7 @@ import InterfaceVariable from './interface';
 import Set from './util/set';
 import Statement from './statement';
 import Type from './type';
+import Kind from './kind';
 
 export default class Block implements Expression {
     private statements: Statement[];
@@ -17,7 +18,7 @@ export default class Block implements Expression {
     }
 
     public returnType(): Type {
-        return Type.Void;
+        return new Type(Kind.Void);
     }
 
     public dependencies(): Set<InterfaceVariable> {

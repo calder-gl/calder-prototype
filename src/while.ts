@@ -3,6 +3,7 @@ import Expression from './expressions/expression';
 import InterfaceVariable from './interface';
 import Set from './util/set';
 import Type from './type';
+import Kind from './kind';
 
 export default class While implements Expression {
     protected condition: Expression;
@@ -14,7 +15,7 @@ export default class While implements Expression {
     }
 
     public returnType(): Type {
-        return Type.Void;
+        return new Type(Kind.Void);
     }
 
     public dependencies(): Set<InterfaceVariable> {
