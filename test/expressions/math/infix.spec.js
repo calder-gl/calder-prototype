@@ -60,14 +60,16 @@ describe('Infix Expressions', () => {
             new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.String), 'rhs'))
         );
 
-        it ('can\'t add string to integer', () => {
-            expect(() => new cgl.Addition(lhs, stringVar))
-                .to.throw('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
-        });
+        describe('general', () => {
+            it ('can\'t add string to integer', () => {
+                expect(() => new cgl.Addition(lhs, stringVar))
+                    .to.throw('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
+            });
 
-        it('modulo must have both types integers', () => {
-            expect(() => new cgl.Modulo(lhs, floatVar))
-                .to.throw('LHS and RHS must be of type Int.');
+            it('modulo must have both types integers', () => {
+                expect(() => new cgl.Modulo(lhs, floatVar))
+                    .to.throw('LHS and RHS must be of type Int.');
+            });
         });
     });
 });

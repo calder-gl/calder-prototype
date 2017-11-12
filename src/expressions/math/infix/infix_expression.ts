@@ -12,9 +12,7 @@ export default abstract class InfixExpression implements Expression {
         this.lhs = lhs;
         this.rhs = rhs;
 
-        if (!(this.bothSameSizeVectors() || this.bothSameSizeMatrices()) &&
-            !(lhs.returnType().checkEquals(new Type(Kind.Int)) || lhs.returnType().checkEquals(new Type(Kind.Float))) ||
-            !(rhs.returnType().checkEquals(new Type(Kind.Int)) || rhs.returnType().checkEquals(new Type(Kind.Float)))) {
+        if (!(this.bothSameSizeVectors() || this.bothSameSizeMatrices()) && !this.bothSidesScalarTypes()) {
             throw new TypeError('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
         }
     }
@@ -22,11 +20,8 @@ export default abstract class InfixExpression implements Expression {
     public abstract source(): string;
 
     public returnType(): Type {
-        if (this.lhs.returnType().checkEquals(new Type(Kind.Float)) ||
-            this.rhs.returnType().checkEquals(new Type(Kind.Float))) {
-            return new Type(Kind.Float);
-        }
-        return new Type(Kind.Int);
+        if (this.atLeastOneSideFloatType()) return new Type(Kind.Float);
+        return this.lhs.returnType();
     }
 
     protected bothSameSizeVectors(): boolean {
@@ -45,5 +40,18 @@ export default abstract class InfixExpression implements Expression {
         return (this.lhs.returnType().checkEquals(new Type(Kind.Mat2)) && this.rhs.returnType().checkEquals(new Type(Kind.Mat2)))
             || (this.lhs.returnType().checkEquals(new Type(Kind.Mat3)) && this.rhs.returnType().checkEquals(new Type(Kind.Mat3)))
             || (this.lhs.returnType().checkEquals(new Type(Kind.Mat4)) && this.rhs.returnType().checkEquals(new Type(Kind.Mat4)));
+    }
+
+    protected bothSidesScalarTypes(): boolean {
+        return (this.lhs.returnType().checkEquals(new Type(Kind.Int)) || this.lhs.returnType().checkEquals(new Type(Kind.Float)))
+            && (this.rhs.returnType().checkEquals(new Type(Kind.Int)) || this.rhs.returnType().checkEquals(new Type(Kind.Float)));
+    }
+
+    protected atLeastOneSideFloatType(): boolean {
+        return this.lhs.returnType().checkEquals(new Type(Kind.Float)) || this.rhs.returnType().checkEquals(new Type(Kind.Float));
+    }
+
+    protected bothSidesIntType(): boolean {
+        return this.lhs.returnType().checkEquals(new Type(Kind.Int)) && (this.rhs.returnType().checkEquals(new Type(Kind.Int)));
     }
 }
