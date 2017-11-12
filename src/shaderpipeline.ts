@@ -1,7 +1,7 @@
 import Shader from './shader';
 import Qualifier from './qualifier';
 import Set from './util/set';
-import InterfaceVariable from './interface';
+import InterfaceVariable from './interfacevariable';
 
 export default class ShaderPipeline {
     private readonly gl: WebGLRenderingContext;
@@ -9,24 +9,30 @@ export default class ShaderPipeline {
     private attributePositions: Map<String, GLint>;
     private attributeBuffers: Map<String, WebGLBuffer>;
     private uniformPositions: Map<String, WebGLUniformLocation>;
-    private inputs: Map<String, InterfaceVariable>;
+    private attributes: Map<String, InterfaceVariable>;
+    private uniforms: Set<InterfaceVariable>;
 
     constructor(gl: WebGLRenderingContext, vertexShader: Shader, fragmentShader: Shader) {
         this.gl = gl;
         this.attributePositions = new Map();
         this.attributeBuffers = new Map();
         this.uniformPositions = new Map();
-        this.inputs = new Map();
-        [...vertexShader.inputs().union(fragmentShader.inputs())].forEach(input => {
-            this.inputs.set(input.name, input);
-        });
+        this.attributes = new Map();
+        vertexShader.inputDecls
+            .filter(input => input.variable.qualifier == Qualifier.Attribute)
+            .forEach(input => this.attributes.set(input.variable.name(), input.variable));
+        this.uniforms = new Set(
+            [...vertexShader.inputDecls]
+                .filter(input => input.variable.qualifier == Qualifier.Uniform)
+                .map(input => input.variable)
+        );
 
         this.compileProgram(vertexShader, fragmentShader);
         this.createBuffers();
     }
 
     public setAttribute(input: string, value: any[], usage: GLenum = this.gl.STATIC_DRAW) {
-        const interfaceVariable = this.inputs.get(input);
+        const interfaceVariable = this.attributes.get(input);
         if (!interfaceVariable) {
             throw new Error(`Unkown input: ${input}`);
         }
@@ -42,7 +48,7 @@ export default class ShaderPipeline {
         }
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, interfaceVariable.wrapAttributeValue(value), usage);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, interfaceVariable.wrapAttributeBufferInTypedArray(value), usage);
         this.gl.vertexAttribPointer(
             position,
             interfaceVariable.size(),
@@ -56,7 +62,7 @@ export default class ShaderPipeline {
 
     // TODO: support variadic args
     public setUniform(input: string, value: any[]) {
-        const interfaceVariable = this.inputs.get(input);
+        const interfaceVariable = this.attributes.get(input);
         if (!interfaceVariable) {
             throw new Error(`Unkown input: ${input}`);
         }
@@ -119,22 +125,16 @@ export default class ShaderPipeline {
     }
 
     private createBuffers() {
-        [...this.inputs.values()].forEach(input => {
-            switch (input.qualifier) {
-                case Qualifier.Attribute: {
-                    this.attributePositions.set(input.name, this.gl.getAttribLocation(this.program, input.name));
-                    this.attributeBuffers.set(input.name, this.makeBuffer());
-                    break;
-                }
-                case Qualifier.Uniform: {
-                    const position = this.gl.getUniformLocation(this.program, input.name);
-                    if (position === null) {
-                        throw new Error(`Unable to find uniform position for ${input.name}`);
-                    }
-                    this.uniformPositions.set(input.name, position);
-                    break;
-                }
+        [...this.uniforms].forEach(uniform => {
+            const position = this.gl.getUniformLocation(this.program, uniform.name());
+            if (position === null) {
+                throw new Error(`Unable to find uniform position for ${uniform.name()}`);
             }
+            this.uniformPositions.set(uniform.name(), position);
+        });
+        [...this.attributes.values()].forEach(attribute => {
+            this.attributePositions.set(attribute.name(), this.gl.getAttribLocation(this.program, attribute.name()));
+            this.attributeBuffers.set(attribute.name(), this.makeBuffer());
         });
     }
 

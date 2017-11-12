@@ -82,7 +82,7 @@ export default class Type {
             || this.checkEquals(new Type(Kind.IVec3))
             || this.checkEquals(new Type(Kind.IVec4));
 
-    public wrapAttributeValue(value: any[]): any {
+    public wrapAttributeBufferInTypedArray(value: any[]): any {
         if (this.metakind != MetaKind.Basic) {
             throw new Error('Unsupported attribute type');
         }

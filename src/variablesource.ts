@@ -24,20 +24,4 @@ export default class VariableSource implements Hashable {
     public hashCode(): string {
         return this.declaration();
     }
-
-    public wrapAttributeValue(value: any[]): any {
-        return this.srcType.wrapAttributeValue(value);
-    }
-
-    public glType(gl: WebGLRenderingContext): GLenum {
-        return this.srcType.glType(gl);
-    }
-
-    public size(): GLsizei {
-        return this.srcType.size();
-    }
-
-    public setUniform(gl: WebGLRenderingContext, position: WebGLUniformLocation, value: any[]) {
-        return this.srcType.setUniform(gl, position, value);
-    }
 }
