@@ -24,7 +24,7 @@ describe('ShaderPipelineBuilder', () => {
                             new cgl.Reference(vertexPosition)
                         )
                     )
-                ])
+                ]), [new cgl.VariableDeclaration(ptColour)], [new cgl.VariableDeclaration(vertexPosition)]
             );
 
             const fragShader = new cgl.Shader(
@@ -35,7 +35,7 @@ describe('ShaderPipelineBuilder', () => {
                             new cgl.Reference(colour)
                         )
                     )
-                ])
+                ]), [new cgl.VariableDeclaration(outColour)], [new cgl.VariableDeclaration(colour)]
             );
 
             const pipelineBuilder = new cgl.ShaderPipelineBuilder(vertexShader, fragShader);
@@ -57,7 +57,7 @@ describe('ShaderPipelineBuilder', () => {
                             new cgl.Reference(vertexPosition)
                         )
                     )
-                ])
+                ]), [], [new cgl.VariableDeclaration(vertexPosition)]
             );
 
             const fragShader = new cgl.Shader(
@@ -68,7 +68,7 @@ describe('ShaderPipelineBuilder', () => {
                             new cgl.Reference(depth)
                         )
                     )
-                ])
+                ]), [new cgl.VariableDeclaration(outDepth)], [new cgl.VariableDeclaration(depth)]
             );
 
             const pipelineBuilder = new cgl.ShaderPipelineBuilder(vertexShader, fragShader);

@@ -4,36 +4,30 @@ import Qualifier from './qualifier';
 import Type from './type';
 import Set from './util/set';
 import VariableSource from './variablesource';
+import VariableDeclaration from './variabledeclaration';
 
 export default class Shader {
     public main: Function;
+    public inputDecls: VariableDeclaration[];
+    public outputDecls: VariableDeclaration[];
 
-    constructor(main: Function = new Function('main')) {
+    constructor(main: Function = new Function('main'), outputs: VariableDeclaration[] = [], inputs: VariableDeclaration[] = []) {
         this.main = main;
+        this.inputDecls = inputs;
+        this.outputDecls = outputs;
     }
 
     public source(): string {
-        return `${this.header()}\n${this.main.source()}`;
-    }
-
-    private header(): string {
-        return [...this.main.dependencies()]
-            .map(dependency => dependency.declaration())
-            .join('\n');
+      return `${this.inputDecls.map(input => input.source()).join('\n')}\n
+              ${this.outputDecls.map(output => output.source()).join('\n')}\n
+              ${this.main.source()}`;
     }
 
     public inputs(): Set<VariableSource> {
-        return new Set([...this.main.dependencies()]
-            .filter(dependency => dependency.qualifier == Qualifier.In
-                || dependency.qualifier == Qualifier.InOut
-                || dependency.qualifier == Qualifier.Attribute)
-            .map(dependency => dependency.variableSrc));
+        return new Set(this.inputDecls.map(varDecl => varDecl.variable.variableSrc));
     }
 
     public outputs(): Set<VariableSource> {
-        return new Set([...this.main.dependencies()]
-            .filter(dependency => dependency.qualifier == Qualifier.Out
-                || dependency.qualifier == Qualifier.InOut)
-            .map(dependency => dependency.variableSrc));
+        return new Set(this.outputDecls.map(varDecl => varDecl.variable.variableSrc));
     }
 }

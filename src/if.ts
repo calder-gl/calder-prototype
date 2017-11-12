@@ -20,12 +20,6 @@ export default class If implements Expression {
         return new Type(Kind.Void);
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return this.condition.dependencies()
-            .union(this.thenBlock.dependencies())
-            .union(this.elseBlock.dependencies());
-    }
-
     public source(): string {
         let src = `if (${this.condition.source()})` +
             this.thenBlock.source();

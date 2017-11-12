@@ -64,6 +64,7 @@ export { default as PostfixDecrement } from './expressions/math/unary/postfix_de
 export { default as Statement } from './statement';
 export { default as Function } from './function';
 export { default as Reference } from './reference';
+export { default as VariableDeclaration } from './variabledeclaration';
 export { default as Shader } from './shader';
 export { default as Qualifier } from './qualifier';
 export { default as Type } from './type';
@@ -80,3 +81,4 @@ export { default as ShaderPipeline } from './shaderpipeline';
 export { default as VariableSource } from './variablesource';
 export { default as Variable } from './variable';
 export { default as InterfaceVariable } from './interfacevariable';
+export { default as LocalVariable } from './localvariable';

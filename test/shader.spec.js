@@ -16,7 +16,7 @@ function basicShader() {
                     new cgl.Reference(vertexPosition)
                 )
             )
-        ])
+        ]), [], [new cgl.VariableDeclaration(vertexPosition)]
     );
 
     return shader;
@@ -28,10 +28,8 @@ describe('Shader', () => {
             const shader = basicShader();
             const source = shader.source();
 
-            // TODO: recognize gl_Position as a default that doesn't need declaring
             const expected = `
                 attribute vec4 vertexPosition;
-                out vec4 gl_Position;
 
                 void main() {
                     gl_Position = vertexPosition;

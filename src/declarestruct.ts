@@ -20,10 +20,6 @@ export default class DeclareStruct implements SyntaxNode {
         this.members = members;
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return new Set<InterfaceVariable>();
-    }
-
     public type(): Type {
         return new Type(this.name, MetaKind.Struct, this.members.map(member => member.srcType));
     }

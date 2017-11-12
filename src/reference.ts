@@ -1,20 +1,15 @@
 import Expression from './expressions/expression';
 import Qualifier from './qualifier';
 import InterfaceVariable from './interfacevariable';
+import Variable from './variable';
 import Set from './util/set';
 import Type from './type';
 
 export default class Reference implements Expression {
-    public readonly qualifier: Qualifier;
-    private variable: InterfaceVariable;
+    private variable: Variable;
 
-    constructor(variable: InterfaceVariable) {
-        this.qualifier = variable.qualifier;
+    constructor(variable: Variable) {
         this.variable = variable;
-    }
-
-    public dependencies(): Set<InterfaceVariable> {
-        return new Set([this.variable]);
     }
 
     public source(): string {

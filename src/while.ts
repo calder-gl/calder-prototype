@@ -18,10 +18,6 @@ export default class While implements Expression {
         return new Type(Kind.Void);
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return this.condition.dependencies().union(this.loopBlock.dependencies());
-    }
-
     public source(): string {
         return `while (${this.condition.source()})` +
             this.loopBlock.source();

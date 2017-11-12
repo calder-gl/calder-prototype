@@ -1,4 +1,3 @@
-import InterfaceVariable from './interfacevariable';
 import Set from './util/set';
 import Statement from './statement';
 import SyntaxNode from './syntaxnode';
@@ -12,20 +11,12 @@ export default class Function implements SyntaxNode {
         this.statements = statements;
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return this.statements.reduce((union, statement) => (
-                union.addAll(statement.dependencies())
-            ),
-            new Set<InterfaceVariable>()
-        );
-    }
-
     public source(): string {
         // TODO: allow more than void()
-        return `void ${this.name}() {\n` +
-            this.statements
+        return `void ${this.name}() {\n
+            ${this.statements
                 .map(statement => statement.source())
-                .join('\n') +
-            '\n}';
+                .join('\n')}\n
+        }`;
     }
 }

@@ -15,10 +15,6 @@ export default class Operator implements Expression {
         this.rhs = rhs;
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return this.rhs.dependencies().union(this.lhs.dependencies());
-    }
-
     public source(): string {
         return `${this.lhs.source()} = ${this.rhs.source()}`;
     }

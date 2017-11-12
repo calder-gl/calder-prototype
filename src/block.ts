@@ -21,14 +21,6 @@ export default class Block implements Expression {
         return new Type(Kind.Void);
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return this.statements.reduce((union, statement) => (
-                union.addAll(statement.dependencies())
-            ),
-            new Set<InterfaceVariable>()
-        );
-    }
-
     public source(): string {
         return '{' +
             this.statements

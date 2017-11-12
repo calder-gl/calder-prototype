@@ -16,10 +16,6 @@ export default abstract class AssignmentExpression implements Expression {
         this.rhs = rhs;
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return this.rhs.dependencies().union(this.lhs.dependencies());
-    }
-
     public abstract source(): string;
 
     public returnType(): Type {

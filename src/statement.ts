@@ -9,10 +9,6 @@ export default class Statement implements SyntaxNode {
         this.node = node;
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return this.node.dependencies();
-    }
-
     public source(): string {
         return `${this.node.source()};`;
     }

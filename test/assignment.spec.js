@@ -5,16 +5,6 @@ describe('Assignment', () => {
     const lhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'lhs')));
     const rhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'rhs')));
 
-    describe('dependencies', () => {
-        it('references both the left and right hand sides', () => {
-            const assignment = new cgl.EqualAssignment(lhs, rhs);
-
-            expect(
-                [...assignment.dependencies()].map(dep => dep.name()).sort()
-            ).to.eql(['lhs', 'rhs']);
-        });
-    });
-
     describe('source', () => {
         it ('equal assignment', () => {
             const assignment = new cgl.EqualAssignment(lhs, rhs);
