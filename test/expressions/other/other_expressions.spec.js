@@ -16,16 +16,5 @@ describe('Other Expressions', () => {
                 expect(operation.source()).to.equalIgnoreSpaces('lhs, rhs');
             });
         });
-
-        describe('errors', () => {
-            let stringVar = new cgl.Reference(
-                new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.String), 'rhs'))
-            );
-
-            it ('throws error when type of reference is not integer', () => {
-                expect(() => new cgl.Comma(lhs, stringVar))
-                    .to.throw('Left-hand side and right-hand side do not match types.');
-            });
-        });
     });
 });
