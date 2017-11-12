@@ -4,6 +4,10 @@ import Expression from '../../expression';
 export default class Multiplication extends InfixExpression {
     constructor(lhs: Expression, rhs: Expression) {
         super(lhs, rhs);
+
+        if (!super.bothSameSizeMatrices() && super.anySideVectorOrMatrix(lhs, rhs)) {
+            throw new TypeError('LHS and RHS must be of type Int, Float, or both sides must be same size matrices.');
+        }
     }
 
     public source(): string {

@@ -12,7 +12,7 @@ export default abstract class InfixExpression implements Expression {
         this.lhs = lhs;
         this.rhs = rhs;
 
-        if (!(this.bothSameSizeVectors() || this.bothSameSizeMatrices()) && !this.bothSidesScalarTypes()) {
+        if (!this.bothSameSizeVectors() && !this.bothSameSizeMatrices() && !this.bothSidesScalarTypes()) {
             throw new TypeError('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
         }
     }
@@ -22,6 +22,29 @@ export default abstract class InfixExpression implements Expression {
     public returnType(): Type {
         if (this.atLeastOneSideFloatType()) return new Type(Kind.Float);
         return this.lhs.returnType();
+    }
+
+    protected vectorType(value: Expression): boolean {
+        return value.returnType().checkEquals(new Type(Kind.Vec2))
+            || value.checkEquals(new Type(Kind.Vec3))
+            || value.checkEquals(new Type(Kind.Vec4))
+            || value.checkEquals(new Type(Kind.BVec2))
+            || value.checkEquals(new Type(Kind.BVec3))
+            || value.checkEquals(new Type(Kind.BVec4))
+            || value.checkEquals(new Type(Kind.IVec2))
+            || value.checkEquals(new Type(Kind.IVec3))
+            || value.checkEquals(new Type(Kind.IVec4));
+    }
+
+    protected matrixType(value: Expression): boolean {
+        return value.checkEquals(new Type(Kind.Mat2))
+            || value.checkEquals(new Type(Kind.Mat3))
+            || value.checkEquals(new Type(Kind.Mat4));
+    }
+
+    protected anySideVectorOrMatrix(lhs: Expression, rhs: Expression) {
+        return this.vectorType(lhs) || this.vectorType(rhs)
+            || this.matrixType(lhs) || this.matrixType(rhs);
     }
 
     protected bothSameSizeVectors(): boolean {
