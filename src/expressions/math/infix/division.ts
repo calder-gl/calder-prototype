@@ -6,7 +6,7 @@ export default class Division extends InfixExpression {
         super(lhs, rhs);
 
         if (super.bothSameSizeVectors() || super.bothSameSizeMatrices()) {
-            throw new TypeError('Can\'t divide vectors.');
+            throw new TypeError('Can\'t divide vectors or matrices.');
         }
     }
 

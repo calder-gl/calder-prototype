@@ -6,7 +6,7 @@ export default class Multiplication extends InfixExpression {
         super(lhs, rhs);
 
         if (super.bothSameSizeVectors() || super.bothSameSizeMatrices()) {
-            throw new TypeError('Can\'t multiply vectors.');
+            throw new TypeError('Can\'t multiply vectors or matrices.');
         }
     }
 

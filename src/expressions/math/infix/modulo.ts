@@ -9,8 +9,6 @@ export default class Modulo extends InfixExpression {
 
         if (!lhs.returnType().checkEquals(new Type(Kind.Int)) || !(rhs.returnType().checkEquals(new Type(Kind.Int)))) {
             throw new TypeError('LHS and RHS must be of type Int.');
-        } else if (super.bothSameSizeVectors() || super.bothSameSizeMatrices()) {
-            throw new TypeError('Can\'t divide vectors.');
         }
     }
 
