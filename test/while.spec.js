@@ -10,7 +10,7 @@ describe('While', () => {
                 new cgl.Reference(conditionInterfaceVariable),
                 new cgl.Block([
                     new cgl.Statement(
-                        new cgl.Assignment(new cgl.Reference(conditionInterfaceVariable), new cgl.Reference(someInterfaceVariable1))
+                        new cgl.EqualAssignment(new cgl.Reference(conditionInterfaceVariable), new cgl.Reference(someInterfaceVariable1))
                     )
                 ])
             );
@@ -30,7 +30,7 @@ describe('While', () => {
                 new cgl.Reference(a),
                 new cgl.Block([
                     new cgl.Statement(
-                        new cgl.Assignment(new cgl.Reference(a), new cgl.Reference(b))
+                        new cgl.EqualAssignment(new cgl.Reference(a), new cgl.Reference(b))
                     )
                 ])
             );
