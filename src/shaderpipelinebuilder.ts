@@ -17,8 +17,8 @@ export default class ShaderPipelineBuilder {
 
         // Vertex shader outputs must be a superset of fragment shader inputs.
         // Might want to enforce equality (need to check the standard), but for now, this should be sufficient.
-        const inVars = new Set<Variable>([...this.fragmentShader.inputs()].map(v => v.variable));
-        const outVars = new Set<Variable>([...this.vertexShader.outputs()].map(v => v.variable));
+        const inVars = this.fragmentShader.inputs();
+        const outVars = this.vertexShader.outputs();
 
         this.isWellFormed = outVars.isSuperset(inVars);
     }
