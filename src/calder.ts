@@ -24,7 +24,18 @@
 
 export { default as Variable } from './variable';
 export { default as SyntaxNode } from './syntaxnode';
+
 export { default as Expression } from './expressions/expression';
+
+// Assignment Expressions
+export { default as Assignment } from './expressions/assignment/assignment';
+export { default as EqualAssignment } from './expressions/assignment/equal_assignment';
+export { default as PlusEqualAssignment } from './expressions/assignment/plus_equal_assignment';
+export { default as MinusEqualAssignment } from './expressions/assignment/minus_equal_assignment';
+export { default as TimesEqualAssignment } from './expressions/assignment/times_equal_assignment';
+export { default as DivideEqualAssignment } from './expressions/assignment/divide_equal_assignment';
+
+// Boolean Expressions
 export { default as BooleanExpression } from './expressions/boolean/boolean_expression';
 export { default as AndExpression } from './expressions/boolean/and_expression';
 export { default as OrExpression } from './expressions/boolean/or_expression';
@@ -35,8 +46,8 @@ export { default as LessThanExpression } from './expressions/boolean/less_than_e
 export { default as LessThanEqualExpression } from './expressions/boolean/less_than_equal_expression';
 export { default as GreaterThanExpression } from './expressions/boolean/greater_than_expression';
 export { default as GreaterThanEqualExpression } from './expressions/boolean/greater_than_equal_expression';
+
 export { default as Statement } from './statement';
-export { default as Assignment } from './expressions/assignment';
 export { default as Function } from './function';
 export { default as Reference } from './reference';
 export { default as Shader } from './shader';

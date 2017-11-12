@@ -11,7 +11,7 @@ function basicShader() {
     const shader = new cgl.Shader(
         new cgl.Function('main', [
             new cgl.Statement(
-                new cgl.Assignment(
+                new cgl.EqualAssignment(
                     new cgl.Reference(glPosition),
                     new cgl.Reference(vertexPosition)
                 )

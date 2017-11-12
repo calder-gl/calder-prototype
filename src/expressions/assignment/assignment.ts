@@ -1,12 +1,12 @@
-import Expression from './expression';
-import InterfaceVariable from '../interface';
-import Reference from '../reference';
-import Set from '../util/set';
-import Type from '../type';
+import Expression from '../expression';
+import InterfaceVariable from '../../interface';
+import Reference from '../../reference';
+import Set from '../../util/set';
+import Type from '../../type';
 
-export default class Assignment implements Expression {
-    private lhs: Reference;
-    private rhs: Expression;
+export default abstract class AssignmentExpression implements Expression {
+    protected lhs: Reference;
+    protected rhs: Expression;
 
     constructor(lhs: Reference, rhs: Expression) {
         if (lhs.returnType() != rhs.returnType())
@@ -20,9 +20,7 @@ export default class Assignment implements Expression {
         return this.rhs.dependencies().union(this.lhs.dependencies());
     }
 
-    public source(): string {
-        return `${this.lhs.source()} = ${this.rhs.source()}`;
-    }
+    public abstract source(): string;
 
     public returnType(): Type {
         return this.lhs.returnType();
