@@ -2,7 +2,7 @@ import AssignmentExpression from './assignment'
 import Expression from '../expression';
 import Reference from '../../reference';
 
-export default abstract class MinusEqualAssignment extends AssignmentExpression {
+export default class MinusEqualAssignment extends AssignmentExpression {
     constructor(lhs: Reference, rhs: Expression) {
         super(lhs, rhs);
     }
