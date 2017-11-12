@@ -57,6 +57,9 @@ export { default as PrefixDecrement } from './expressions/math/unary/prefix_decr
 export { default as PostfixIncrement } from './expressions/math/unary/postfix_increment';
 export { default as PostfixDecrement } from './expressions/math/unary/postfix_decrement';
 
+// Other Expressions
+export { default as Comma } from './expressions/other/comma';
+
 /*****************************
  * Other
  *****************************/
