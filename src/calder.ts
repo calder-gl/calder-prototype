@@ -25,6 +25,10 @@
 export { default as Variable } from './variable';
 export { default as SyntaxNode } from './syntaxnode';
 
+/*****************************
+ * Expressions
+ *****************************/
+
 export { default as Expression } from './expressions/expression';
 
 // Assignment Expressions
@@ -46,6 +50,17 @@ export { default as LessThanExpression } from './expressions/boolean/less_than_e
 export { default as LessThanEqualExpression } from './expressions/boolean/less_than_equal_expression';
 export { default as GreaterThanExpression } from './expressions/boolean/greater_than_expression';
 export { default as GreaterThanEqualExpression } from './expressions/boolean/greater_than_equal_expression';
+
+// Unary Math Expressions
+export { default as UnaryExpression } from './expressions/math/unary/unary_expression';
+export { default as PrefixIncrement } from './expressions/math/unary/prefix_increment';
+export { default as PrefixDecrement } from './expressions/math/unary/prefix_decrement';
+export { default as PostfixIncrement } from './expressions/math/unary/postfix_increment';
+export { default as PostfixDecrement } from './expressions/math/unary/postfix_decrement';
+
+/*****************************
+ * Other
+ *****************************/
 
 export { default as Statement } from './statement';
 export { default as Function } from './function';
