@@ -1,4 +1,4 @@
-import InterfaceVariable from './interface';
+import InterfaceVariable from './interfacevariable';
 import Set from './util/set';
 import SyntaxNode from './syntaxnode';
 
@@ -7,10 +7,6 @@ export default class Statement implements SyntaxNode {
 
     constructor(node: SyntaxNode) {
         this.node = node;
-    }
-
-    public dependencies(): Set<InterfaceVariable> {
-        return this.node.dependencies();
     }
 
     public source(): string {

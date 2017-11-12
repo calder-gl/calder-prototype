@@ -2,42 +2,17 @@ import { expect } from 'chai';
 import * as cgl from '../src/calder';
 
 describe('Block', () => {
-    describe('dependencies', () => {
-        it('references all included statements', () => {
-            const block = new cgl.Block([
-                new cgl.Reference(
-                    new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'a'))
-                ),
-                new cgl.Reference(
-                    new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'b'))
-                )
-            ]);
-
-            expect(
-                [...block.dependencies()].map(dep => dep.name).sort()
-            ).to.eql(['a', 'b']);
-        });
-
-        it('handles an empty block', () => {
-            const block = new cgl.Block();
-
-            expect(
-                [...block.dependencies()].map(dep => dep.name).sort()
-            ).to.eql([]);
-        });
-    });
-
     describe('source', () => {
         it('references all included statements', () => {
             const block = new cgl.Block([
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'a'))
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'a'))
                     )
                 ),
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'b'))
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'b'))
                     )
                 )
             ]);
@@ -57,12 +32,12 @@ describe('Block', () => {
             const block = new cgl.Block([
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'a'))
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'a'))
                     )
                 ),
                 new cgl.Statement(
                     new cgl.Reference(
-                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Vec4), 'b'))
+                        new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.Vec4), 'b'))
                     )
                 )
             ]);

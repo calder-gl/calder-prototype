@@ -1,5 +1,5 @@
 import Expression from '../expression';
-import InterfaceVariable from '../../interface';
+import InterfaceVariable from '../../interfacevariable';
 import Reference from '../../reference';
 import Set from '../../util/set';
 import Type from '../../type';
@@ -15,10 +15,6 @@ export default abstract class BooleanExpression implements Expression {
 
         this.lhs = lhs;
         this.rhs = rhs;
-    }
-
-    public dependencies(): Set<InterfaceVariable> {
-        return this.rhs.dependencies().union(this.lhs.dependencies());
     }
 
     public abstract source(): string;

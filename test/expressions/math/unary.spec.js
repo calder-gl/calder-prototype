@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import * as cgl from '../../../src/calder';
 
 describe('Unary Expressions', () => {
-    let lhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.Int), 'lhs')));
+    let lhs = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.Int), 'lhs')));
 
     describe('source', () => {
         it ('prefix increment', () => {
@@ -27,13 +27,8 @@ describe('Unary Expressions', () => {
     });
 
     describe('errors', () => {
-        let constVar = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.Const, new cgl.Variable(new cgl.Type(cgl.Kind.Int), 'lhs')));
-        let stringVar = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.Variable(new cgl.Type(cgl.Kind.String), 'lhs')));
-
-        it ('throws error on mutation of const variable', () => {
-            expect(() => new cgl.PostfixDecrement(constVar))
-                .to.throw('Can\'t mutate constant variable.');
-        });
+        let constVar = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.Const, new cgl.VariableSource(new cgl.Type(cgl.Kind.Int), 'lhs')));
+        let stringVar = new cgl.Reference(new cgl.InterfaceVariable(cgl.Qualifier.In, new cgl.VariableSource(new cgl.Type(cgl.Kind.String), 'lhs')));
 
         it ('throws error when type of reference is not integer', () => {
             expect(() => new cgl.PostfixDecrement(stringVar))

@@ -1,6 +1,6 @@
 import Block from './block';
 import Expression from './expressions/expression';
-import InterfaceVariable from './interface';
+import InterfaceVariable from './interfacevariable';
 import Set from './util/set';
 import Type from './type';
 import Kind from './kind';
@@ -18,12 +18,6 @@ export default class If implements Expression {
 
     public returnType(): Type {
         return new Type(Kind.Void);
-    }
-
-    public dependencies(): Set<InterfaceVariable> {
-        return this.condition.dependencies()
-            .union(this.thenBlock.dependencies())
-            .union(this.elseBlock.dependencies());
     }
 
     public source(): string {

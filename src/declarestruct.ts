@@ -1,10 +1,10 @@
-import InterfaceVariable from './interface';
+import InterfaceVariable from './interfacevariable';
 import Qualifier from './qualifier';
 import Set from './util/set';
 import SyntaxNode from './syntaxnode';
-import Variable from './variable';
 import Type from './type';
 import MetaKind from './metakind';
+import VariableSource from './variablesource';
 
 /**
  * struct type-name {
@@ -13,19 +13,15 @@ import MetaKind from './metakind';
  */
 export default class DeclareStruct implements SyntaxNode {
     public readonly name: string;
-    private members: Variable[];
+    private members: VariableSource[];
 
-    constructor(name: string, members: Variable[]) {
+    constructor(name: string, members: VariableSource[]) {
         this.name = name;
         this.members = members;
     }
 
-    public dependencies(): Set<InterfaceVariable> {
-        return new Set<InterfaceVariable>();
-    }
-
     public type(): Type {
-        return new Type(this.name, MetaKind.Struct, this.members.map(member => member.type));
+        return new Type(this.name, MetaKind.Struct, this.members.map(member => member.srcType));
     }
 
     public source(): string {

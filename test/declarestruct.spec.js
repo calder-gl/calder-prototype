@@ -3,8 +3,8 @@ import * as cgl from '../src/calder';
 
 describe('DeclareStruct', () => {
     describe('source', () => {
-        const a = new cgl.Variable(new cgl.Type(cgl.Kind.Bool), 'a');
-        const b = new cgl.Variable(new cgl.Type(cgl.Kind.Bool), 'b');
+        const a = new cgl.VariableSource(new cgl.Type(cgl.Kind.Bool), 'a');
+        const b = new cgl.VariableSource(new cgl.Type(cgl.Kind.Bool), 'b');
 
         it('is well formed', () => {
             const structureDeclaration = new cgl.DeclareStruct('structName', [a, b]);
