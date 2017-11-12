@@ -81,5 +81,85 @@ export default class Type {
             || this.checkEquals(new Type(Kind.IVec2))
             || this.checkEquals(new Type(Kind.IVec3))
             || this.checkEquals(new Type(Kind.IVec4));
+
+    public wrapAttributeValue(value: any[]): any {
+        if (this.metakind != MetaKind.Basic) {
+            throw new Error('Unsupported attribute type');
+        }
+
+        if (this.name == 'float' || this.name.startsWith('vec') || this.name.startsWith('mat')) {
+            return new Float32Array(value);
+        } else if (this.name == 'int' || this.name.startsWith('i')) {
+            return new Int32Array(value);
+        } else {
+            throw new Error('Unsupported attribute type');
+        }
+    }
+
+    public glType(gl: WebGLRenderingContext): GLenum {
+        if (this.metakind != MetaKind.Basic) {
+            throw new Error('Unsupported attribute type');
+        }
+
+        if (this.name == 'float' || this.name.startsWith('vec') || this.name.startsWith('mat')) {
+            return gl.FLOAT;
+        } else if (this.name == 'int' || this.name.startsWith('i')) {
+            return gl.INT;
+        } else {
+            throw new Error('Unsupported attribute type');
+        }
+    }
+
+    public size(): GLsizei {
+        if (this.metakind != MetaKind.Basic) {
+            throw new Error('Unsupported attribute type');
+        }
+
+        if (this.name == 'int' || this.name == 'float' || this.name == 'bool') {
+            return 1;
+        } else if (this.name.endsWith('2')) {
+            return 2;
+        } else if (this.name.endsWith('3')) {
+            return 3;
+        } else if (this.name.endsWith('4')) {
+            return 4;
+        } else {
+            throw new Error('Unsupported attribute type');
+        }
+    }
+
+    public setUniform(gl: WebGLRenderingContext, position: WebGLUniformLocation, value: any[]) {
+        if (this.metakind != MetaKind.Basic) {
+            throw new Error('Unsupported attribute type');
+        }
+
+        switch (this.name) {
+            case Kind.Int:
+                gl.uniform1iv(position, value);
+                break;
+            case Kind.IVec2:
+                gl.uniform2iv(position, value);
+                break;
+            case Kind.IVec3:
+                gl.uniform3iv(position, value);
+                break;
+            case Kind.IVec4:
+                gl.uniform4iv(position, value);
+                break;
+            case Kind.Float:
+                gl.uniform1fv(position, value);
+                break;
+            case Kind.Vec2:
+                gl.uniform2fv(position, value);
+                break;
+            case Kind.Vec3:
+                gl.uniform3fv(position, value);
+                break;
+            case Kind.Vec4:
+                gl.uniform4fv(position, value);
+                break;
+            default:
+                throw new Error('Unsupported uniform type');
+        }
     }
 }

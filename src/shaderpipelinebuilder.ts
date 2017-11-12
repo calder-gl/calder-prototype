@@ -1,6 +1,8 @@
 import Shader from './shader';
 import Type from './type';
 import ShaderPipeline from './shaderpipeline';
+import Variable from './variable';
+import Set from './util/set';
 
 export default class ShaderPipelineBuilder {
     public isWellFormed: boolean;
@@ -15,13 +17,13 @@ export default class ShaderPipelineBuilder {
 
         // Vertex shader outputs must be a superset of fragment shader inputs.
         // Might want to enforce equality (need to check the standard), but for now, this should be sufficient.
-        const inVars = this.fragmentShader.inputs();
-        const outVars = this.vertexShader.outputs();
+        const inVars = new Set<Variable>([...this.fragmentShader.inputs()].map(v => v.variable));
+        const outVars = new Set<Variable>([...this.vertexShader.outputs()].map(v => v.variable));
 
         this.isWellFormed = outVars.isSuperset(inVars);
     }
 
-    public build(): ShaderPipeline {
-        return new ShaderPipeline(this.vertexShader, this.fragmentShader);
+    public build(gl: WebGLRenderingContext): ShaderPipeline {
+        return new ShaderPipeline(gl, this.vertexShader, this.fragmentShader);
     }
 }
