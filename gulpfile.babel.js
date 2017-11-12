@@ -11,6 +11,7 @@ import typescript from "gulp-typescript";
 
 const src = ["./src/**/*.ts"];
 const test =  ["./test/**/*.js"]
+const sample =  ["./sample/**/*.js"]
 const out = "./build";
 const babelConf = { presets: ["es2015"] };
 
@@ -23,6 +24,7 @@ const project = typescript.createProject("tsconfig.json", {
 gulp.task("build", function () {
   const sourceDestination = `${out}/js/src`;
   const testDestination = `${out}/js/test`;
+  const sampleDestination = `${out}/js/sample`;
 
   const result = gulp.src(src)
     .pipe(changed(sourceDestination))
@@ -36,7 +38,11 @@ gulp.task("build", function () {
     gulp.src(test)
       .pipe(changed(testDestination))
       .pipe(babel(babelConf))
-      .pipe(gulp.dest(testDestination))
+      .pipe(gulp.dest(testDestination)),
+    gulp.src(sample)
+      .pipe(changed(sampleDestination))
+      .pipe(babel(babelConf))
+      .pipe(gulp.dest(sampleDestination))
   ]);
 });
 
