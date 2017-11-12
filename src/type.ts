@@ -1,5 +1,5 @@
 import MetaKind from './metakind';
-import Kind from './kind';
+import TypeException from './exceptions/typeexception';
 
 export default class Type {
     public readonly name: string;
@@ -11,9 +11,24 @@ export default class Type {
         this.metakind = metakind;
         this.children = children;
 
-        // TODO: check that:
-        // a) metakind == Basic => children == []
-        // b) metakind == Array => children == [SomeType]
+        // Validate children types
+        switch (metakind) {
+            case MetaKind.Basic: {
+                if (children.length != 0) {
+                    throw new TypeException('Basic kind cannot have any children types.');
+                }
+                break;
+            }
+            case MetaKind.Array: {
+                if (children.length != 1) {
+                    throw new TypeException('Array kind must have exactly one child type.');
+                }
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 
     public checkEquals(otherType: Type): boolean {

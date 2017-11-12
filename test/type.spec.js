@@ -16,6 +16,14 @@ describe('Type', () => {
 
             expect(intType.checkEquals(floatType)).to.be.false;
         });
+
+        it('cannot have any children types', () => {
+            let childrenTypes = [new cgl.Type(cgl.Kind.Int)];
+
+            expect(() => {
+                let invalidArray = new cgl.Type('', cgl.MetaKind.Basic, childrenTypes);
+            }).to.throw(cgl.TypeException, 'Basic kind cannot have any children types.');
+        });
     });
 
     describe('array types', () => {
@@ -31,6 +39,14 @@ describe('Type', () => {
             const floatArrayType = new cgl.Type('', cgl.MetaKind.Array, [new cgl.Type(cgl.Kind.Float)]);
 
             expect(intArrayType.checkEquals(floatArrayType)).to.be.false;
+        });
+
+        it('must have exactly one child type upon initialization', () => {
+            let childrenTypes = [new cgl.Type(cgl.Kind.Int), new cgl.Type(cgl.Kind.Float)];
+
+            expect(() => {
+                let invalidArray = new cgl.Type('', cgl.MetaKind.Array, childrenTypes);
+            }).to.throw(cgl.TypeException, 'Array kind must have exactly one child type.');
         });
     });
 

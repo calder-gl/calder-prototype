@@ -59,6 +59,12 @@ export { default as PostfixIncrement } from './expressions/math/unary/postfix_in
 export { default as PostfixDecrement } from './expressions/math/unary/postfix_decrement';
 
 /*****************************
+ * Exceptions
+ *****************************/
+
+export { default as TypeException } from './exceptions/typeexception';
+
+/*****************************
  * Other
  *****************************/
 
