@@ -26,20 +26,20 @@ export default abstract class InfixExpression implements Expression {
 
     protected vectorType(value: Expression): boolean {
         return value.returnType().checkEquals(new Type(Kind.Vec2))
-            || value.checkEquals(new Type(Kind.Vec3))
-            || value.checkEquals(new Type(Kind.Vec4))
-            || value.checkEquals(new Type(Kind.BVec2))
-            || value.checkEquals(new Type(Kind.BVec3))
-            || value.checkEquals(new Type(Kind.BVec4))
-            || value.checkEquals(new Type(Kind.IVec2))
-            || value.checkEquals(new Type(Kind.IVec3))
-            || value.checkEquals(new Type(Kind.IVec4));
+            || value.returnType().checkEquals(new Type(Kind.Vec3))
+            || value.returnType().checkEquals(new Type(Kind.Vec4))
+            || value.returnType().checkEquals(new Type(Kind.BVec2))
+            || value.returnType().checkEquals(new Type(Kind.BVec3))
+            || value.returnType().checkEquals(new Type(Kind.BVec4))
+            || value.returnType().checkEquals(new Type(Kind.IVec2))
+            || value.returnType().checkEquals(new Type(Kind.IVec3))
+            || value.returnType().checkEquals(new Type(Kind.IVec4));
     }
 
     protected matrixType(value: Expression): boolean {
-        return value.checkEquals(new Type(Kind.Mat2))
-            || value.checkEquals(new Type(Kind.Mat3))
-            || value.checkEquals(new Type(Kind.Mat4));
+        return value.returnType().checkEquals(new Type(Kind.Mat2))
+            || value.returnType().checkEquals(new Type(Kind.Mat3))
+            || value.returnType().checkEquals(new Type(Kind.Mat4));
     }
 
     protected anySideVectorOrMatrix(lhs: Expression, rhs: Expression) {
