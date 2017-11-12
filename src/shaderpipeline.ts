@@ -69,6 +69,14 @@ export default class ShaderPipeline {
         interfaceVariable.setUniform(this.gl, position, value);
     }
 
+    public useProgram() {
+        this.gl.useProgram(this.program);
+    }
+
+    public draw(vertices: GLint, offset: GLint = 0) {
+        this.gl.drawArrays(this.gl.TRIANGLE_STRIP, offset, vertices);
+    }
+
     private compileProgram(vertexShader: Shader, fragmentShader: Shader) {
         const program = this.gl.createProgram();
         if (program === null) {
