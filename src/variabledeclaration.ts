@@ -2,10 +2,10 @@ import Variable from './variable';
 import Expression from './expressions/expression';
 import Type from './type';
 
-export default class VariableDeclaration implements Expression {
-    public readonly variable: Variable;
+export default class VariableDeclaration<V extends Variable> implements Expression {
+    public readonly variable: V;
     
-    constructor(variable: Variable) {
+    constructor(variable: V) {
         this.variable = variable;
     }
 

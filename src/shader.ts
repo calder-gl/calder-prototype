@@ -8,10 +8,12 @@ import VariableDeclaration from './variabledeclaration';
 
 export default class Shader {
     public main: Function;
-    public inputDecls: VariableDeclaration[];
-    public outputDecls: VariableDeclaration[];
+    public inputDecls: VariableDeclaration<InterfaceVariable>[];
+    public outputDecls: VariableDeclaration<InterfaceVariable>[];
 
-    constructor(main: Function = new Function('main'), outputs: VariableDeclaration[] = [], inputs: VariableDeclaration[] = []) {
+    constructor(main: Function = new Function('main'),
+                outputs: VariableDeclaration<InterfaceVariable>[] = [],
+                inputs: VariableDeclaration<InterfaceVariable>[] = []) {
         this.main = main;
         this.inputDecls = inputs;
         this.outputDecls = outputs;
