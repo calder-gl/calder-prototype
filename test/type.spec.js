@@ -44,9 +44,9 @@ describe('Type', () => {
 
         it('recognizes unequal types', () => {
             const structType1 = new cgl.Type('aStruct', cgl.MetaKind.Struct, [new cgl.Type(cgl.Kind.Int), new cgl.Type(cgl.Kind.Bool)]);
-            const structType2 = new cgl.Type('aStruct', cgl.MetaKind.Struct, [new cgl.Type(cgl.Kind.Int))]);
+            const structType2 = new cgl.Type('aStruct', cgl.MetaKind.Struct, [new cgl.Type(cgl.Kind.Int)]);
 
-            expect(intArrayType.checkEquals(floatArrayType)).to.be.false;
+            expect(structType1.checkEquals(structType2)).to.be.false;
         });
     });
 });
