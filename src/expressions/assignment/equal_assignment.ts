@@ -8,7 +8,6 @@ export default class EqualAssignment extends AssignmentExpression {
     }
 
     public source(): string {
-        console.log(this);
         return `${this.lhs.source()} = ${this.rhs.source()}`;
     }
 }
