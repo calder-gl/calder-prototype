@@ -29,7 +29,6 @@ const vertexShader = new cgl.Shader(
         new cgl.VariableDeclaration(modelView)
     ]
 );
-console.log(vertexShader.source());
 
 const fragShader = new cgl.Shader(
     new cgl.Function('main', [
@@ -41,7 +40,6 @@ const fragShader = new cgl.Shader(
         )
     ]), [], [new cgl.VariableDeclaration(colour)]
 );
-console.log(fragShader.source());
 
 const pipelineBuilder = new cgl.ShaderPipelineBuilder(vertexShader, fragShader);
 const pipeline = pipelineBuilder.build(gl);

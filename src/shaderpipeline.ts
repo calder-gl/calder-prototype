@@ -49,7 +49,6 @@ export default class ShaderPipeline {
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, interfaceVariable.wrapAttributeBufferInTypedArray(value), usage);
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
-        console.log(interfaceVariable.size(),);
         this.gl.vertexAttribPointer(
             position,
             interfaceVariable.size(),
