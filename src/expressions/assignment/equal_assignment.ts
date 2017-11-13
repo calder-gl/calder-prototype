@@ -1,4 +1,4 @@
-import AssignmentExpression from './assignment'
+import AssignmentExpression from './assignment_expression'
 import Expression from '../expression';
 import Reference from '../../reference';
 
