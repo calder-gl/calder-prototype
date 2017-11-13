@@ -1,3 +1,4 @@
+import Kind from './kind';
 import MetaKind from './metakind';
 import TypeException from './exceptions/typeexception';
 
@@ -31,6 +32,8 @@ export default class Type {
         }
     }
 
+    // Equality Helper Methods
+
     public checkEquals(otherType: Type): boolean {
         // Note: for structs, this only verifies that they have the same structure (i.e. same # and types
         // of child types), but doesn't check that the variable names in the struct are identical.
@@ -45,5 +48,48 @@ export default class Type {
         }
 
         return true;
+    }
+
+    public checkVectorEquals(otherType: Type): boolean {
+        return (this.checkEquals(new Type(Kind.Vec2)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.Vec3)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.Vec4)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.BVec2)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.BVec3)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.BVec4)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.IVec2)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.IVec3)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.IVec4)) && this.checkEquals(otherType));
+    }
+
+    public checkMatrixEquals(otherType: Type): boolean {
+        return (this.checkEquals(new Type(Kind.Mat2)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.Mat3)) && this.checkEquals(otherType))
+            || (this.checkEquals(new Type(Kind.Mat4)) && this.checkEquals(otherType));
+    }
+
+    // Type Checking Helper Methods
+
+    public isScalarType(): boolean {
+        return this.checkEquals(new Type(Kind.Int))
+            || this.checkEquals(new Type(Kind.Float));
+    }
+
+    public isMatrixType(): boolean {
+        return this.checkEquals(new Type(Kind.Mat2))
+            || this.checkEquals(new Type(Kind.Mat3))
+            || this.checkEquals(new Type(Kind.Mat4));
+    }
+
+    public isVectorType(): boolean {
+        return this.checkEquals(new Type(Kind.Vec2))
+            || this.checkEquals(new Type(Kind.Vec3))
+            || this.checkEquals(new Type(Kind.Vec4))
+            || this.checkEquals(new Type(Kind.BVec2))
+            || this.checkEquals(new Type(Kind.BVec3))
+            || this.checkEquals(new Type(Kind.BVec4))
+            || this.checkEquals(new Type(Kind.IVec2))
+            || this.checkEquals(new Type(Kind.IVec3))
+            || this.checkEquals(new Type(Kind.IVec4));
     }
 }
