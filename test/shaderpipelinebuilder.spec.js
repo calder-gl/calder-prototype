@@ -13,13 +13,13 @@ describe('ShaderPipelineBuilder', () => {
             const vertexShader = new cgl.Shader(
                 new cgl.Function('main', [
                     new cgl.Statement(
-                        new cgl.Assignment(
+                        new cgl.EqualAssignment(
                             new cgl.Reference(glPosition),
                             new cgl.Reference(vertexPosition)
                         )
                     ),
                     new cgl.Statement(
-                        new cgl.Assignment(
+                        new cgl.EqualAssignment(
                             new cgl.Reference(ptColour),
                             new cgl.Reference(vertexPosition)
                         )
@@ -30,7 +30,7 @@ describe('ShaderPipelineBuilder', () => {
             const fragShader = new cgl.Shader(
                 new cgl.Function('main', [
                     new cgl.Statement(
-                        new cgl.Assignment(
+                        new cgl.EqualAssignment(
                             new cgl.Reference(outColour),
                             new cgl.Reference(colour)
                         )
@@ -52,7 +52,7 @@ describe('ShaderPipelineBuilder', () => {
             const vertexShader = new cgl.Shader(
                 new cgl.Function('main', [
                     new cgl.Statement(
-                        new cgl.Assignment(
+                        new cgl.EqualAssignment(
                             new cgl.Reference(glPosition),
                             new cgl.Reference(vertexPosition)
                         )
@@ -63,7 +63,7 @@ describe('ShaderPipelineBuilder', () => {
             const fragShader = new cgl.Shader(
                 new cgl.Function('main', [
                     new cgl.Statement(
-                        new cgl.Assignment(
+                        new cgl.EqualAssignment(
                             new cgl.Reference(outDepth),
                             new cgl.Reference(depth)
                         )
