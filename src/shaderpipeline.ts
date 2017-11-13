@@ -10,7 +10,7 @@ export default class ShaderPipeline {
     private attributeBuffers: Map<String, WebGLBuffer>;
     private uniformPositions: Map<String, WebGLUniformLocation>;
     private attributes: Map<String, InterfaceVariable>;
-    private uniforms: Set<InterfaceVariable>;
+    private uniforms: Map<String, InterfaceVariable>;
 
     constructor(gl: WebGLRenderingContext, vertexShader: Shader, fragmentShader: Shader) {
         this.gl = gl;
@@ -21,11 +21,11 @@ export default class ShaderPipeline {
         vertexShader.inputDecls
             .filter(input => input.variable.qualifier == Qualifier.Attribute)
             .forEach(input => this.attributes.set(input.variable.name(), input.variable));
-        this.uniforms = new Set(
-            [...vertexShader.inputDecls]
-                .filter(input => input.variable.qualifier == Qualifier.Uniform)
-                .map(input => input.variable)
-        );
+        this.uniforms = new Map();
+        [...vertexShader.inputDecls, ...fragmentShader.inputDecls]
+            .filter(input => input.variable.qualifier == Qualifier.Uniform)
+            .forEach(input => this.uniforms.set(input.variable.name(), input.variable));
+        console.log(this.uniforms);
 
         this.compileProgram(vertexShader, fragmentShader);
         this.createBuffers();
@@ -38,12 +38,12 @@ export default class ShaderPipeline {
         }
 
         const buffer = this.attributeBuffers.get(input);
-        if (!buffer) {
+        if (buffer === null || buffer === undefined) {
             throw new Error(`${input} is not an attribute`);
         }
 
         const position = this.attributePositions.get(input);
-        if (!position) {
+        if (position === null || position === undefined) {
             throw new Error(`${input} is not an attribute`);
         }
 
@@ -62,9 +62,10 @@ export default class ShaderPipeline {
 
     // TODO: support variadic args
     public setUniform(input: string, value: any[]) {
-        const interfaceVariable = this.attributes.get(input);
+        console.log(this.uniforms);
+        const interfaceVariable = this.uniforms.get(input);
         if (!interfaceVariable) {
-            throw new Error(`Unkown input: ${input}`);
+            throw new Error(`Unknown input: ${input}`);
         }
 
         const position = this.uniformPositions.get(input);
@@ -125,7 +126,7 @@ export default class ShaderPipeline {
     }
 
     private createBuffers() {
-        [...this.uniforms].forEach(uniform => {
+        [...this.uniforms.values()].forEach(uniform => {
             const position = this.gl.getUniformLocation(this.program, uniform.name());
             if (position === null) {
                 throw new Error(`Unable to find uniform position for ${uniform.name()}`);

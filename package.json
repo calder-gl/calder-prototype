@@ -20,7 +20,19 @@
   "scripts": {
     "watch": "gulp watch",
     "build": "gulp",
+    "browser": "gulp && gulp browser",
     "start": "node build/js/index.js",
     "test": "gulp && ./node_modules/.bin/mocha ./build/js/test/ --recursive"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babelify": "^8.0.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-sequence": "^0.4.6",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
