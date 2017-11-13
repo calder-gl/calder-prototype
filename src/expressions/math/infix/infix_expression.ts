@@ -43,7 +43,7 @@ export default abstract class InfixExpression implements Expression {
             || value.returnType().checkEquals(new Type(Kind.Mat4));
     }
 
-    protected anySideVectorOrMatrix(lhs: Expression, rhs: Expression) {
+    protected eitherSideVectorOrMatrix(lhs: Expression, rhs: Expression) {
         return this.vectorType(lhs) || this.vectorType(rhs)
             || this.matrixType(lhs) || this.matrixType(rhs);
     }

@@ -6,7 +6,7 @@ export default class Division extends InfixExpression {
     constructor(lhs: Expression, rhs: Expression) {
         super(lhs, rhs);
 
-        if (super.anySideVectorOrMatrix(lhs, rhs)) {
+        if (super.eitherSideVectorOrMatrix(lhs, rhs)) {
             throw new TypeException('LHS and RHS must be of type Int or Float.');
         }
     }
