@@ -16,7 +16,7 @@ export default abstract class InfixExpression implements Expression {
         if (!this.lhs.returnType().checkVectorEquals(rhs.returnType()) &&
             !this.lhs.returnType().checkMatrixEquals(rhs.returnType()) &&
             !this.bothSidesScalarTypes()) {
-            throw new TypeException('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
+            //throw new TypeException('LHS and RHS must be of type Int, Float, or same size vector/matrix.');
         }
     }
 

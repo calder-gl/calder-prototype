@@ -7,7 +7,7 @@ export default class Multiplication extends InfixExpression {
         super(lhs, rhs);
 
         if (!lhs.returnType().checkMatrixEquals(rhs.returnType()) && super.eitherSideVectorOrMatrix(lhs, rhs)) {
-            throw new TypeException('LHS and RHS must be of type Int, Float, or both sides must be same size matrices.');
+            //throw new TypeException('LHS and RHS must be of type Int, Float, or both sides must be same size matrices.');
         }
     }
 

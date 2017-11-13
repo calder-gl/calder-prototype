@@ -20,9 +20,10 @@ export default class Shader {
     }
 
     public source(): string {
-      return `${this.inputDecls.map(input => input.source()).join('\n')}\n
-              ${this.outputDecls.map(output => output.source()).join('\n')}\n
-              ${this.main.source()}`;
+        return `precision mediump float;
+            ${this.inputDecls.map(input => input.source()).join('\n')}\n
+            ${this.outputDecls.map(output => output.source()).join('\n')}\n
+            ${this.main.source()}`;
     }
 
     public inputs(): Set<VariableSource> {

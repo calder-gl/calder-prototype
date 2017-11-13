@@ -9,8 +9,8 @@ export default abstract class AssignmentExpression implements Expression {
     protected rhs: Expression;
 
     constructor(lhs: Reference, rhs: Expression) {
-        if (!lhs.returnType().checkEquals(rhs.returnType()))
-            throw new TypeError("Left-hand side and right-hand side do not match types.");
+        //if (!lhs.returnType().checkEquals(rhs.returnType()))
+            //throw new TypeError("Left-hand side and right-hand side do not match types.");
 
         this.lhs = lhs;
         this.rhs = rhs;

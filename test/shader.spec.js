@@ -29,6 +29,7 @@ describe('Shader', () => {
             const source = shader.source();
 
             const expected = `
+                precision mediump float;
                 attribute vec4 vertexPosition;
 
                 void main() {

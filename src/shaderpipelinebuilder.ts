@@ -1,6 +1,8 @@
 import Shader from './shader';
 import Type from './type';
 import ShaderPipeline from './shaderpipeline';
+import Variable from './variable';
+import Set from './util/set';
 
 export default class ShaderPipelineBuilder {
     public isWellFormed: boolean;
@@ -21,7 +23,7 @@ export default class ShaderPipelineBuilder {
         this.isWellFormed = outVars.isSuperset(inVars);
     }
 
-    public build(): ShaderPipeline {
-        return new ShaderPipeline(this.vertexShader, this.fragmentShader);
+    public build(gl: WebGLRenderingContext): ShaderPipeline {
+        return new ShaderPipeline(gl, this.vertexShader, this.fragmentShader);
     }
 }
