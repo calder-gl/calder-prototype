@@ -31,7 +31,6 @@ export { default as SyntaxNode } from './syntaxnode';
 export { default as Expression } from './expressions/expression';
 
 // Assignment Expressions
-export { default as Assignment } from './expressions/assignment/assignment';
 export { default as EqualAssignment } from './expressions/assignment/equal_assignment';
 export { default as PlusEqualAssignment } from './expressions/assignment/plus_equal_assignment';
 export { default as MinusEqualAssignment } from './expressions/assignment/minus_equal_assignment';
@@ -39,7 +38,6 @@ export { default as TimesEqualAssignment } from './expressions/assignment/times_
 export { default as DivideEqualAssignment } from './expressions/assignment/divide_equal_assignment';
 
 // Boolean Expressions
-export { default as BooleanExpression } from './expressions/boolean/boolean_expression';
 export { default as AndExpression } from './expressions/boolean/and_expression';
 export { default as OrExpression } from './expressions/boolean/or_expression';
 export { default as EqualExpression } from './expressions/boolean/equal_expression';
@@ -51,14 +49,12 @@ export { default as GreaterThanExpression } from './expressions/boolean/greater_
 export { default as GreaterThanEqualExpression } from './expressions/boolean/greater_than_equal_expression';
 
 // Unary Math Expressions
-export { default as UnaryExpression } from './expressions/math/unary/unary_expression';
 export { default as PrefixIncrement } from './expressions/math/unary/prefix_increment';
 export { default as PrefixDecrement } from './expressions/math/unary/prefix_decrement';
 export { default as PostfixIncrement } from './expressions/math/unary/postfix_increment';
 export { default as PostfixDecrement } from './expressions/math/unary/postfix_decrement';
 
 // Infix Math Expressions
-export { default as InfixExpression } from './expressions/math/infix/infix_expression';
 export { default as Addition } from './expressions/math/infix/addition';
 export { default as Subtraction } from './expressions/math/infix/subtraction';
 export { default as Multiplication } from './expressions/math/infix/multiplication';
