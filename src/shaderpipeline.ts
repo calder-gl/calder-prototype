@@ -25,7 +25,6 @@ export default class ShaderPipeline {
         [...vertexShader.inputDecls, ...fragmentShader.inputDecls]
             .filter(input => input.variable.qualifier == Qualifier.Uniform)
             .forEach(input => this.uniforms.set(input.variable.name(), input.variable));
-        console.log(this.uniforms);
 
         this.compileProgram(vertexShader, fragmentShader);
         this.createBuffers();
@@ -49,6 +48,8 @@ export default class ShaderPipeline {
 
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, interfaceVariable.wrapAttributeBufferInTypedArray(value), usage);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
+        console.log(interfaceVariable.size(),);
         this.gl.vertexAttribPointer(
             position,
             interfaceVariable.size(),
@@ -62,7 +63,6 @@ export default class ShaderPipeline {
 
     // TODO: support variadic args
     public setUniform(input: string, value: any[]) {
-        console.log(this.uniforms);
         const interfaceVariable = this.uniforms.get(input);
         if (!interfaceVariable) {
             throw new Error(`Unknown input: ${input}`);

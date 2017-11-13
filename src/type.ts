@@ -81,6 +81,7 @@ export default class Type {
             || this.checkEquals(new Type(Kind.IVec2))
             || this.checkEquals(new Type(Kind.IVec3))
             || this.checkEquals(new Type(Kind.IVec4));
+    }
 
     public wrapAttributeBufferInTypedArray(value: any[]): any {
         if (this.metakind != MetaKind.Basic) {
@@ -157,6 +158,15 @@ export default class Type {
                 break;
             case Kind.Vec4:
                 gl.uniform4fv(position, value);
+                break;
+            case Kind.Mat2:
+                gl.uniformMatrix2fv(position, false, value);
+                break;
+            case Kind.Mat3:
+                gl.uniformMatrix3fv(position, false, value);
+                break;
+            case Kind.Mat4:
+                gl.uniformMatrix4fv(position, false, value);
                 break;
             default:
                 throw new Error('Unsupported uniform type');

@@ -14,7 +14,13 @@ const vertexShader = new cgl.Shader(
         new cgl.Statement(
             new cgl.EqualAssignment(
                 new cgl.Reference(glPosition),
-                new cgl.Reference(vertexPosition)
+                new cgl.Multiplication(
+                    new cgl.Reference(projection),
+                    new cgl.Multiplication(
+                        new cgl.Reference(modelView),
+                        new cgl.Reference(vertexPosition)
+                    )
+                )
             )
         )
     ]), [], [
@@ -23,6 +29,7 @@ const vertexShader = new cgl.Shader(
         new cgl.VariableDeclaration(modelView)
     ]
 );
+console.log(vertexShader.source());
 
 const fragShader = new cgl.Shader(
     new cgl.Function('main', [
@@ -34,6 +41,7 @@ const fragShader = new cgl.Shader(
         )
     ]), [], [new cgl.VariableDeclaration(colour)]
 );
+console.log(fragShader.source());
 
 const pipelineBuilder = new cgl.ShaderPipelineBuilder(vertexShader, fragShader);
 const pipeline = pipelineBuilder.build(gl);
@@ -49,17 +57,19 @@ mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 const modelViewMatrix = mat4.create();
 mat4.translate(modelViewMatrix, modelViewMatrix, [-0.0, 0.0, -6.0]);
 
+pipeline.useProgram();
 gl.clearColor(0.0, 0.0, 0.0, 1.0);
 gl.clearDepth(1.0);
 gl.enable(gl.DEPTH_TEST);
 gl.depthFunc(gl.LEQUAL);
 gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-pipeline.useProgram();
 pipeline.setAttribute('vertexPosition', [
-    1.0, 1.0,
-    -1.0, 1.0,
-    1.0, -1.0,
-    -1.0, -1.0
+    1.0, 1.0, 0.0, 1.0,
+    -1.0, 1.0, 0.0, 1.0,
+    1.0, -1.0, 0.0, 1.0,
+    -1.0, -1.0, 0.0, 1.0
 ]);
-pipeline.setUniform('colour', [1.0,  0.0,  0.0,  1.0]);
-pipeline.draw();
+pipeline.setUniform('colour', [1.0,  1.0,  1.0,  1.0]);
+pipeline.setUniform('modelView', modelViewMatrix);
+pipeline.setUniform('projection', projectionMatrix);
+pipeline.draw(4);
