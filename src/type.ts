@@ -51,21 +51,11 @@ export default class Type {
     }
 
     public checkVectorEquals(otherType: Type): boolean {
-        return (this.checkEquals(new Type(Kind.Vec2)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.Vec3)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.Vec4)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.BVec2)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.BVec3)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.BVec4)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.IVec2)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.IVec3)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.IVec4)) && this.checkEquals(otherType));
+        return this.isVectorType() && this.checkEquals(otherType);
     }
 
     public checkMatrixEquals(otherType: Type): boolean {
-        return (this.checkEquals(new Type(Kind.Mat2)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.Mat3)) && this.checkEquals(otherType))
-            || (this.checkEquals(new Type(Kind.Mat4)) && this.checkEquals(otherType));
+        return this.isMatrixType() && this.checkEquals(otherType);
     }
 
     // Type Checking Helper Methods
