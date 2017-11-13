@@ -1,18 +1,21 @@
+import Expression from './expressions/expression';
 import InterfaceVariable from './interfacevariable';
-import Kind from './kind';
 import Set from './util/set';
 import SyntaxNode from './syntaxnode';
+import Type from './type';
 
-export default class ReturnStatement implements SyntaxNode {
-    private node: SyntaxNode;
-    public readonly returnType: Kind;
+export default class ReturnStatement implements Expression {
+    private expression: Expression;
 
-    constructor(node: SyntaxNode, returnType: Kind) {
-        this.node = node;
-        this.returnType = returnType;
+    constructor(expression: Expression) {
+        this.expression = expression;
     }
 
     public source(): string {
-        return `return ${this.node.source()};`;
+        return `return ${this.expression.source()};`;
+    }
+
+    public returnType(): Type {
+        return this.expression.returnType();
     }
 }
