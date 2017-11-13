@@ -29,7 +29,9 @@ describe('Function', () => {
         });
 
         it('handles different return types', () => {
-            const test = new cgl.Function('test', [new cgl.ReturnStatement(new cgl.Reference(integerVar))], cgl.Kind.Int);
+            const test = new cgl.Function(
+                'test', [new cgl.ReturnStatement(new cgl.Reference(integerVar), cgl.Kind.Int)], cgl.Kind.Int
+            );
 
             expect(test.source()).to.equalIgnoreSpaces(`int test() {
                 return 0;
