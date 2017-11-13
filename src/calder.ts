@@ -79,6 +79,7 @@ export { default as TypeException } from './exceptions/typeexception';
  *****************************/
 
 export { default as Statement } from './statement';
+export { default as ReturnStatement } from './return_statement';
 export { default as Function } from './function';
 export { default as Reference } from './reference';
 export { default as VariableDeclaration } from './variabledeclaration';
