@@ -13,9 +13,6 @@ yarn install
 
 # Watch for changes to TypeScript, and build on change
 gulp watch
-
-# Run the compiled es5 JavaScript code
-npm start
 ```
 
 ### Testing
