@@ -11,13 +11,19 @@ You should have `gulp-cli` installed on your system already: `yarn global add gu
 # Install dependencies
 yarn install
 
-# Watch for changes to TypeScript, and build on change
-gulp watch
+# Build code
+yarn build
 ```
 
 ### Testing
 Note: test files should have the suffix: `.spec.ts`
 ```bash
 # Run full test suite
-npm test
+yarn test
+```
+
+Running the in-browser example:
+```bash
+yarn browser
+open sample.html
 ```
