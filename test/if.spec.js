@@ -34,6 +34,24 @@ describe('If', () => {
             expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; }');
         });
 
+        it('has else block if provided', () => {
+            const ifStmt = new cgl.If(
+                new cgl.Reference(a),
+                new cgl.Block([
+                    new cgl.Statement(
+                        new cgl.EqualAssignment(new cgl.Reference(a), new cgl.Reference(b))
+                    )
+                ]),
+                new cgl.Block([
+                    new cgl.Statement(
+                        new cgl.EqualAssignment(new cgl.Reference(a), new cgl.Reference(c))
+                    )
+                ])
+            );
+
+            expect(ifStmt.source()).to.equalIgnoreSpaces('if (a) { a=b; } else { a=c; }');
+        });
+
         describe('boolean expressions', () => {
             it('and', () => {
                 const ifStmt = new cgl.If(
