@@ -55,19 +55,36 @@ mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
 const modelViewMatrix = mat4.create();
 mat4.translate(modelViewMatrix, modelViewMatrix, [-0.0, 0.0, -6.0]);
 
-pipeline.useProgram();
-gl.clearColor(0.0, 0.0, 0.0, 1.0);
-gl.clearDepth(1.0);
-gl.enable(gl.DEPTH_TEST);
-gl.depthFunc(gl.LEQUAL);
-gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-pipeline.setAttribute('vertexPosition', [
-    1.0, 1.0, 0.0, 1.0,
-    -1.0, 1.0, 0.0, 1.0,
-    1.0, -1.0, 0.0, 1.0,
-    -1.0, -1.0, 0.0, 1.0
-]);
-pipeline.setUniform('colour', [1.0,  1.0,  1.0,  1.0]);
-pipeline.setUniform('modelView', modelViewMatrix);
-pipeline.setUniform('projection', projectionMatrix);
-pipeline.draw(4);
+function render() {
+    pipeline.useProgram();
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearDepth(1.0);
+    gl.enable(gl.DEPTH_TEST);
+    gl.depthFunc(gl.LEQUAL);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    pipeline.vertexPosition = [
+        1.0, 1.0, 0.0, 1.0,
+        -1.0, 1.0, 0.0, 1.0,
+        1.0, -1.0, 0.0, 1.0,
+        -1.0, -1.0, 0.0, 1.0
+    ];
+    pipeline.colour = [1.0,  1.0,  1.0,  1.0];
+    pipeline.modelView = modelViewMatrix;
+    pipeline.projection = projectionMatrix;
+    pipeline.draw(4);
+}
+render();
+
+document.body.addEventListener('mousemove', function(e) {
+    const x = (e.clientX - window.innerWidth/2)/(window.innerWidth/2);
+    const y = (e.clientY - window.innerHeight/2)/(window.innerHeight/2);
+
+    mat4.identity(modelViewMatrix);
+    mat4.translate(modelViewMatrix, modelViewMatrix, [-0.0, 0.0, -6.0]);
+    mat4.rotate(modelViewMatrix, modelViewMatrix, y*Math.PI/3, [1, 0, 0]);
+    mat4.rotate(modelViewMatrix, modelViewMatrix, x*Math.PI/3, [0, 1, 0]);
+
+    if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(render);
+    }
+});
