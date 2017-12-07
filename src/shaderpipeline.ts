@@ -6,11 +6,11 @@ import Shader from './shader';
 export default class ShaderPipeline {
     private readonly gl: WebGLRenderingContext;
     public program: WebGLProgram;
-    private attributePositions: Map<String, GLint>;
-    private attributeBuffers: Map<String, WebGLBuffer>;
-    private uniformPositions: Map<String, WebGLUniformLocation>;
-    private attributes: Map<String, InterfaceVariable>;
-    private uniforms: Map<String, InterfaceVariable>;
+    private attributePositions: Map<string, GLint>;
+    private attributeBuffers: Map<string, WebGLBuffer>;
+    private uniformPositions: Map<string, WebGLUniformLocation>;
+    private attributes: Map<string, InterfaceVariable>;
+    private uniforms: Map<string, InterfaceVariable>;
 
     constructor(gl: WebGLRenderingContext, vertexShader: Shader, fragmentShader: Shader) {
         this.gl = gl;
@@ -25,6 +25,13 @@ export default class ShaderPipeline {
         [...vertexShader.inputDecls, ...fragmentShader.inputDecls]
             .filter(input => input.variable.qualifier == Qualifier.Uniform)
             .forEach(input => this.uniforms.set(input.variable.name(), input.variable));
+
+        [...this.attributes.keys()].forEach(key => Object.defineProperty(this, key, {
+            set: (value: any[]) => this.setAttribute(key, value)
+        }));
+        [...this.uniforms.keys()].forEach(key => Object.defineProperty(this, key, {
+            set: (value: any[]) => this.setUniform(key, value)
+        }));
 
         this.compileProgram(vertexShader, fragmentShader);
         this.createBuffers();
